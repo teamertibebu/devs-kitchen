@@ -32,7 +32,6 @@ function Header() {
           {business.name}
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <Link to="/menu" className="hover:text-brand transition-colors">Menu</Link>
           <Link to="/about" className="hover:text-brand transition-colors">About</Link>
           <Link to="/contact" className="hover:text-brand transition-colors">Contact</Link>
           <Link to="/account" className="hover:text-brand transition-colors">Account</Link>
