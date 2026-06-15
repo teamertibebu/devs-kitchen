@@ -48,7 +48,6 @@ function Header() {
         <div className="md:hidden border-t border-rule bg-paper">
           <nav className="px-5 py-4 flex flex-col gap-1 text-base">
             {[
-              ["/menu", "Menu"],
               ["/about", "About"],
               ["/contact", "Contact"],
               ["/account", "Account"],
