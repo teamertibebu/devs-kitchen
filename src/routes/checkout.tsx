@@ -6,7 +6,7 @@ import { Check, Lock, CreditCard, Smartphone, Banknote } from "lucide-react";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({
-    meta: [{ title: "Checkout — Dev's Kitchen" }, { name: "description", content: "Complete your pre-order." }],
+    meta: [{ title: "Checkout — DEV'S\u00a0KITCHEN" }, { name: "description", content: "Complete your pre-order." }],
   }),
   component: Checkout,
 });
