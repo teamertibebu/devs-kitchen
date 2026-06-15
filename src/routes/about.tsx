@@ -5,10 +5,10 @@ import ownerImg from "@/assets/owner.jpg";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Coastal Kitchen" },
-      { name: "description", content: "Meet Elena, the home cook behind Coastal Kitchen." },
-      { property: "og:title", content: "About Coastal Kitchen" },
-      { property: "og:description", content: "Meet Elena, the home cook behind Coastal Kitchen." },
+      { title: "About — Dev's Kitchen" },
+      { name: "description", content: "Meet Elena, the home cook behind Dev's Kitchen." },
+      { property: "og:title", content: "About Dev's Kitchen" },
+      { property: "og:description", content: "Meet Elena, the home cook behind Dev's Kitchen." },
     ],
   }),
   component: About,
@@ -26,10 +26,12 @@ function About() {
         <div className="space-y-6 text-base md:text-lg leading-relaxed">
           <p>{business.story}</p>
           <p>
-            Every Saturday we cook a small, considered menu. Pasta is rolled by hand. Bread is fermented for two days. Vegetables come from the Alemany farmers market on Saturday mornings before service.
+            Every Saturday we cook a small, considered menu. Pasta is rolled by hand. Bread is fermented for two days.
+            Vegetables come from the Alemany farmers market on Saturday mornings before service.
           </p>
           <p>
-            We never make more than we can pack with care. Pre-ordering lets us cook just enough — no waste, no compromise.
+            We never make more than we can pack with care. Pre-ordering lets us cook just enough — no waste, no
+            compromise.
           </p>
           <p className="font-display uppercase text-base">— {business.ownerName}</p>
         </div>

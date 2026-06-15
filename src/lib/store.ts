@@ -225,12 +225,12 @@ const seedSchedule: Schedule = {
 };
 
 const seedBusiness: Business = {
-  name: "Coastal Kitchen",
+  name: "Dev's Kitchen",
   tagline: "Hand-rolled pasta and slow-fermented bread, made one weekend at a time.",
   signatureDish: { name: "Hand-Cut Pappardelle", price: 24 },
   story:
-    "Hi, I'm Elena. Coastal Kitchen started as Sunday dinners for friends and grew into a weekly thing. Every batch is made by hand in my home kitchen — small, intentional, and meant to be shared at the table.",
-  ownerName: "Elena Rossi",
+    "Hi, I'm Dev. Dev's Kitchen started as Sunday dinners for friends and grew into a weekly thing. Every batch is made by hand in my home kitchen — small, intentional, and meant to be shared at the table.",
+  ownerName: "Dev",
   ownerPhoto: "/owner",
   address: "1244 Harbor View Dr · Apt 4B",
   neighborhood: "San Francisco, CA",
@@ -265,7 +265,9 @@ type State = {
   clearCart: () => void;
 
   // checkout
-  placeOrder: (input: Omit<Order, "id" | "createdAt" | "status" | "lines" | "subtotal" | "total"> & { lines?: CartLine[] }) => Order;
+  placeOrder: (
+    input: Omit<Order, "id" | "createdAt" | "status" | "lines" | "subtotal" | "total"> & { lines?: CartLine[] },
+  ) => Order;
 
   // items
   saveItem: (item: Item) => void;
@@ -306,7 +308,10 @@ export const useStore = create<State>()(
         }),
       updateQty: (itemId, qty) =>
         set((s) => ({
-          cart: qty <= 0 ? s.cart.filter((l) => l.itemId !== itemId) : s.cart.map((l) => (l.itemId === itemId ? { ...l, qty } : l)),
+          cart:
+            qty <= 0
+              ? s.cart.filter((l) => l.itemId !== itemId)
+              : s.cart.map((l) => (l.itemId === itemId ? { ...l, qty } : l)),
         })),
       removeFromCart: (itemId) => set((s) => ({ cart: s.cart.filter((l) => l.itemId !== itemId) })),
       clearCart: () => set({ cart: [] }),
@@ -374,7 +379,9 @@ export const useStore = create<State>()(
     }),
     {
       name: "coastal-kitchen-v1",
-      storage: createJSONStorage(() => (typeof window !== "undefined" ? localStorage : (undefined as unknown as Storage))),
+      storage: createJSONStorage(() =>
+        typeof window !== "undefined" ? localStorage : (undefined as unknown as Storage),
+      ),
       // Reseed images if the persisted version stored stale src paths from a previous build.
       version: 1,
     },

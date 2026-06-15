@@ -1,209 +1,194 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useStore, fmtMoney } from "@/lib/store";
 import ownerImg from "@/assets/owner.jpg";
-import { Clock, MapPin, CalendarDays, Plus, Check } from "lucide-react";
-import { toast } from "sonner";
-import { useHydrated } from "@/lib/hydrate";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Coastal Kitchen — This Week's Plates, Saturday Pickup" },
-      { name: "description", content: "A tiny home kitchen cooking two plates a week. Order by Thursday, pick up Saturday." },
-      { property: "og:title", content: "Coastal Kitchen" },
-      { property: "og:description", content: "Two plates a week. Order by Thursday, pick up Saturday." },
+      { title: "Dev's Kitchen — Weekly Pre-Order for Saturday Pickup" },
+      {
+        name: "description",
+        content:
+          "Hand-rolled pasta and slow-fermented bread from a home kitchen. Pre-order this week's batch for Saturday pickup in San Francisco.",
+      },
+      { property: "og:title", content: "Dev's Kitchen" },
+      { property: "og:description", content: "Pre-order this week's batch for Saturday pickup." },
     ],
   }),
   component: Home,
 });
 
-function Squiggle() {
-  return (
-    <svg viewBox="0 0 200 12" className="block w-full h-2.5 -mt-1 text-brand" preserveAspectRatio="none" aria-hidden>
-      <path
-        d="M2 7 Q 20 1, 40 6 T 80 6 T 120 6 T 160 6 T 198 6"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
 function Home() {
   const items = useStore((s) => s.items);
   const business = useStore((s) => s.business);
   const schedule = useStore((s) => s.schedule);
-  const addToCart = useStore((s) => s.addToCart);
-  const cart = useStore((s) => s.cart);
-  const hydrated = useHydrated();
 
-  const featured = items.filter((i) => !i.soldOut).slice(0, 2);
+  const featured = items.filter((i) => i.featured && !i.soldOut).slice(0, 3);
+  const signature = featured[0];
   const sat = schedule.pickupDays[0];
-  const firstSlot = sat?.slots[0].label.split(" — ")[0];
-  const lastSlot = sat?.slots[sat.slots.length - 1].label.split(" — ")[1];
 
   return (
-    <div className="pb-28 md:pb-12">
-      {/* Top strip — week + close time */}
-      <section className="px-5 md:px-10 max-w-6xl mx-auto pt-6 md:pt-8 pb-4">
-        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-          <span className="eyebrow text-olive">{schedule.weekLabel}</span>
-          <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand">
-            Orders close Thu 8pm
-          </span>
+    <div className="pb-24 md:pb-8">
+      {/* HERO — split editorial cover */}
+      <section className="relative flex flex-col md:flex-row md:min-h-[80vh] border-b border-rule">
+        <div className="w-full md:w-1/2 px-5 md:px-12 py-8 md:py-12 flex flex-col justify-between border-b md:border-b-0 md:border-r border-rule animate-[slide-up_0.7s_var(--ease-out-expo)]">
+          <div className="flex justify-between items-start">
+            <span className="eyebrow">01 / This Week</span>
+            <div className="text-right">
+              <p className="text-[10px] font-bold uppercase tracking-widest leading-none">Pickup Window</p>
+              <p className="text-sm text-brand mt-1">
+                {sat?.label} · {sat?.slots[0].label.split(" — ")[0]}–
+                {sat?.slots[sat.slots.length - 1].label.split(" — ")[1]}
+              </p>
+            </div>
+          </div>
+
+          <div className="my-10 md:my-14">
+            <h1 className="font-display text-[14vw] md:text-[7vw] lg:text-[6.5rem] leading-[0.85] uppercase mb-5">
+              {business.name.split(" ").map((w, i) => (
+                <span key={i} className="block">
+                  {w}
+                </span>
+              ))}
+            </h1>
+            <p className="max-w-[34ch] text-base md:text-lg leading-snug text-pretty">{business.tagline}</p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link
+              to="/menu"
+              className="bg-brand text-brand-ink px-7 py-4 font-bold uppercase text-xs tracking-[0.2em] hover:brightness-110 transition-all text-center"
+            >
+              Pre-Order for {sat?.label.split(",")[0]}
+            </Link>
+            <Link
+              to="/contact"
+              className="border border-ink/20 px-7 py-4 font-bold uppercase text-xs tracking-[0.2em] hover:bg-ink/5 transition-all text-center"
+            >
+              Contact
+            </Link>
+          </div>
         </div>
-        <h1 className="font-display text-3xl md:text-5xl leading-[1] tracking-tight mt-3 max-w-2xl">
-          This week, I'm{" "}
-          <span className="inline-block">
-            <span className="text-brand">cooking</span>
-            <Squiggle />
-          </span>{" "}
-          two plates.
-        </h1>
+
+        <div className="w-full md:w-1/2 relative bg-paper aspect-[3/4] md:aspect-auto md:min-h-[80vh] animate-[fade-in_0.9s_var(--ease-out-expo)_0.15s_both]">
+          {signature && (
+            <>
+              <img
+                src={signature.image}
+                alt={signature.name}
+                className="absolute inset-0 w-full h-full object-cover"
+                width={1200}
+                height={1600}
+              />
+              <div className="absolute bottom-0 left-0 bg-brand text-brand-ink p-5 md:p-6 max-w-[90%]">
+                <p className="text-[10px] font-bold tracking-[0.2em] uppercase mb-1 opacity-90">Signature Dish</p>
+                <p className="font-display text-lg md:text-2xl uppercase tracking-tight leading-tight">
+                  {signature.name} / {fmtMoney(signature.price).replace(".00", "")}
+                </p>
+              </div>
+            </>
+          )}
+        </div>
       </section>
 
-      {/* TWO MEAL CARDS */}
-      <section className="px-5 md:px-10 max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-          {featured.map((item, idx) => {
-            const inCart = hydrated ? cart.find((l) => l.itemId === item.id) : undefined;
-            const rot = idx === 0 ? "-rotate-3" : "rotate-2";
-            return (
-              <article
-                key={item.id}
-                className="bg-paper border border-rule flex flex-col"
-              >
-                <Link
-                  to="/menu/$itemId"
-                  params={{ itemId: item.id }}
-                  className="relative block aspect-[4/3] overflow-hidden group"
-                >
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
-                    loading={idx === 0 ? "eager" : "lazy"}
-                  />
-                  {/* Price sticker */}
-                  <span
-                    className={`absolute top-4 right-4 bg-brand text-brand-ink font-display text-xl px-3 py-2 leading-none shadow-md ${rot}`}
-                  >
-                    {fmtMoney(item.price)}
-                  </span>
-                  {item.popular && (
-                    <span className="absolute top-4 left-4 bg-olive text-brand-ink text-[10px] font-bold uppercase tracking-[0.2em] px-2 py-1">
-                      A fave
+      {/* FEATURED DISHES */}
+      <section className="px-5 md:px-12 max-w-7xl mx-auto pt-16 md:pt-24">
+        <div className="flex items-baseline gap-4 mb-10">
+          <span className="eyebrow">02 / Menu</span>
+          <h2 className="font-display text-2xl md:text-3xl uppercase tracking-tight">This Week's Batch</h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-x-16 gap-y-10">
+          {items.slice(0, 6).map((item) => (
+            <Link
+              key={item.id}
+              to="/menu/$itemId"
+              params={{ itemId: item.id }}
+              className={`group border-b border-ink/10 pb-5 block ${item.soldOut ? "opacity-50" : ""}`}
+            >
+              <div className="flex justify-between items-end mb-2 gap-4">
+                <h3 className="font-display text-lg md:text-xl uppercase tracking-tight leading-tight">
+                  {item.name}
+                  {item.popular && !item.soldOut && (
+                    <span className="ml-2 text-[9px] font-bold tracking-[0.2em] text-brand align-middle">
+                      ★ POPULAR
                     </span>
                   )}
-                </Link>
+                </h3>
+                <span className="font-medium text-brand whitespace-nowrap">{fmtMoney(item.price)}</span>
+              </div>
+              <p className="text-sm text-ink-soft mb-4 max-w-[50ch]">{item.description}</p>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] inline-block">
+                {item.soldOut ? "Sold out" : "View →"}
+              </span>
+            </Link>
+          ))}
+        </div>
 
-                <div className="p-5 md:p-6 flex flex-col flex-1">
-                  <span className="eyebrow text-olive mb-2">Plate {String(idx + 1).padStart(2, "0")}</span>
-                  <h2 className="font-display text-2xl md:text-3xl tracking-tight leading-[1.05] mb-3">
-                    {item.name}
-                  </h2>
-                  <p className="text-[15px] text-ink-soft leading-relaxed mb-5 flex-1">
-                    {item.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      onClick={() => {
-                        addToCart(item.id);
-                        toast.success(`Added — ${item.name}`);
-                      }}
-                      className="inline-flex items-center gap-2 bg-brand text-brand-ink px-5 py-3 font-bold uppercase text-[11px] tracking-[0.18em] hover:brightness-110 transition-all"
-                    >
-                      {inCart ? <><Check className="size-3.5" /> In bag ({inCart.qty})</> : <><Plus className="size-3.5" /> Add to bag</>}
-                    </button>
-                    <Link
-                      to="/menu/$itemId"
-                      params={{ itemId: item.id }}
-                      className="inline-flex items-center px-5 py-3 font-bold uppercase text-[11px] tracking-[0.18em] border-2 border-olive text-olive hover:bg-olive hover:text-brand-ink transition-colors"
-                    >
-                      See more →
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
+        <div className="mt-12 flex justify-center">
+          <Link
+            to="/menu"
+            className="bg-ink text-bg px-8 py-4 font-bold uppercase text-xs tracking-[0.2em] hover:bg-brand transition-colors"
+          >
+            View Full Menu →
+          </Link>
         </div>
       </section>
 
-      {/* Quick info strip */}
-      <section className="px-5 md:px-10 max-w-6xl mx-auto mt-10 md:mt-14">
-        <div className="bg-paper border border-rule grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-rule">
-          <InfoCell icon={CalendarDays} label="Pickup">{sat?.label}</InfoCell>
-          <InfoCell icon={Clock} label="Window">{firstSlot} – {lastSlot}</InfoCell>
-          <InfoCell icon={MapPin} label="Where">
-            {business.address}<br />
-            <span className="text-ink-soft">{business.neighborhood}</span>
-          </InfoCell>
-        </div>
-      </section>
-
-      {/* Owner note */}
-      <section className="px-5 md:px-10 max-w-6xl mx-auto mt-14 md:mt-20">
-        <div className="bg-paper border border-rule p-6 md:p-10 flex flex-col sm:flex-row gap-6 sm:gap-8 items-start">
-          <img
-            src={ownerImg}
-            alt={business.ownerName}
-            className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover flex-shrink-0 border-4 border-olive"
-            loading="lazy"
-          />
+      {/* STORY */}
+      <section className="bg-paper border-y border-rule mt-20 py-16 md:py-24 px-5 md:px-12">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-10 md:gap-14 items-start md:items-center">
+          <div className="w-40 h-52 md:w-48 md:h-64 flex-shrink-0">
+            <img
+              src={ownerImg}
+              alt={business.ownerName}
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              loading="lazy"
+            />
+          </div>
           <div>
-            <span className="eyebrow text-olive mb-2 block">A note from me</span>
-            <p className="text-base md:text-lg leading-relaxed text-ink mb-3">
-              {business.story}
-            </p>
-            <p className="text-sm text-ink-soft">
-              — {business.ownerName}, cooking out of my home in {business.neighborhood}
-            </p>
+            <span className="eyebrow block mb-4">03 / Story</span>
+            <blockquote className="font-display text-xl md:text-2xl uppercase leading-tight mb-6 tracking-tight">
+              "The best meals aren't rushed. They're started days in advance and shared in the afternoon sun."
+            </blockquote>
+            <p className="text-base md:text-lg leading-relaxed text-ink/80 mb-6">{business.story}</p>
+            <div className="flex items-center gap-4">
+              <div className="h-px w-12 bg-brand" />
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em]">{business.ownerName}, Founder</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="px-5 md:px-10 max-w-6xl mx-auto mt-14 md:mt-20">
-        <span className="eyebrow text-olive block mb-5">How this works</span>
-        <ol className="grid sm:grid-cols-3 gap-6 md:gap-8">
-          {[
-            ["Pick a plate", "Browse what I'm cooking and add it to your bag."],
-            ["Order by Thursday", "Choose a 30-min Saturday pickup window."],
-            ["Come get it", "Stop by, grab your bag, eat well. That's it."],
-          ].map(([t, d], i) => (
-            <li key={t} className="border-t-2 border-ink pt-4">
-              <p className="font-display text-5xl md:text-6xl text-olive leading-none mb-3">
-                {String(i + 1).padStart(2, "0")}
-              </p>
-              <p className="font-bold text-[16px] mb-1">{t}</p>
-              <p className="text-sm text-ink-soft leading-relaxed">{d}</p>
-            </li>
-          ))}
-        </ol>
+      {/* TESTIMONIAL */}
+      <section className="px-5 md:px-12 max-w-4xl mx-auto py-20 text-center">
+        <span className="eyebrow block mb-6">04 / From the Neighborhood</span>
+        <p className="font-display text-2xl md:text-3xl uppercase leading-tight tracking-tight mb-6">
+          "I ordered for one — and we ate it for three meals. The ragù is unreal. Easiest thing I've added to my week."
+        </p>
+        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-ink-soft">— Maya R., Bernal Heights</p>
       </section>
-    </div>
-  );
-}
 
-function InfoCell({
-  icon: Icon,
-  label,
-  children,
-}: {
-  icon: React.ElementType;
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="px-5 md:px-7 py-5">
-      <div className="flex items-center gap-2 mb-2">
-        <Icon className="size-4 text-brand" />
-        <span className="eyebrow text-olive">{label}</span>
-      </div>
-      <p className="text-[15px] leading-snug">{children}</p>
+      {/* CONTACT CTA */}
+      <section className="bg-ink text-bg px-5 md:px-12 py-20 mt-8">
+        <div className="max-w-4xl mx-auto">
+          <span className="eyebrow text-bg/60 block mb-4">05 / Pickup</span>
+          <h2 className="font-display text-3xl md:text-5xl uppercase leading-none mb-6">{schedule.weekLabel}</h2>
+          <p className="text-lg md:text-xl text-bg/80 max-w-xl mb-8">
+            Orders close{" "}
+            <span className="text-brand-ink underline decoration-brand decoration-2 underline-offset-4">
+              Thursday at 8pm
+            </span>
+            . Pickup is at {business.address}, {business.neighborhood}.
+          </p>
+          <Link
+            to="/menu"
+            className="bg-brand text-brand-ink inline-block px-8 py-4 font-bold uppercase text-xs tracking-[0.2em]"
+          >
+            Start Pre-Order →
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,12 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import {
-  Outlet,
-  Link,
-  createRootRouteWithContext,
-  useRouter,
-  HeadContent,
-  Scripts,
-} from "@tanstack/react-router";
+import { Outlet, Link, createRootRouteWithContext, useRouter, HeadContent, Scripts } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
@@ -20,7 +13,10 @@ function NotFoundComponent() {
         <p className="eyebrow mb-3">404</p>
         <h1 className="font-display text-5xl uppercase leading-none mb-4">Lost in the kitchen</h1>
         <p className="text-sm text-ink-soft mb-6">That page doesn't exist. Head back to this week's menu.</p>
-        <Link to="/" className="inline-flex items-center justify-center bg-brand text-brand-ink px-6 py-3 font-bold uppercase text-xs tracking-widest">
+        <Link
+          to="/"
+          className="inline-flex items-center justify-center bg-brand text-brand-ink px-6 py-3 font-bold uppercase text-xs tracking-widest"
+        >
           Back home
         </Link>
       </div>
@@ -51,7 +47,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           >
             Try again
           </button>
-          <a href="/" className="border border-ink/20 px-6 py-3 font-bold uppercase text-xs tracking-widest hover:bg-ink/5">
+          <a
+            href="/"
+            className="border border-ink/20 px-6 py-3 font-bold uppercase text-xs tracking-widest hover:bg-ink/5"
+          >
             Go home
           </a>
         </div>
@@ -65,10 +64,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Coastal Kitchen — Weekly Pre-Order" },
-      { name: "description", content: "Hand-rolled pasta and slow-fermented bread, made one weekend at a time. Pre-order for Saturday pickup." },
-      { name: "author", content: "Coastal Kitchen" },
-      { property: "og:title", content: "Coastal Kitchen — Weekly Pre-Order" },
+      { title: "Dev's Kitchen — Weekly Pre-Order" },
+      {
+        name: "description",
+        content:
+          "Hand-rolled pasta and slow-fermented bread, made one weekend at a time. Pre-order for Saturday pickup.",
+      },
+      { name: "author", content: "Dev's Kitchen" },
+      { property: "og:title", content: "Dev's Kitchen — Weekly Pre-Order" },
       { property: "og:description", content: "Pre-order this week's batch for Saturday pickup in San Francisco." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
