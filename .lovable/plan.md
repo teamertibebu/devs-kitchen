@@ -1,77 +1,29 @@
-# Plan: Casual restructure + Olive & Paprika palette
+## Goal
+Make the two weekly meals the first thing visible above the fold. Remove redundant branding and the "This Week's Batch" section.
 
-## 1. New palette — Olive & Paprika
+## Changes to `src/routes/index.tsx`
 
-Update `src/styles.css` design tokens:
-- `--bg` → warm cream `#f6f1e6`
-- `--paper` → near-white `#fbf7ed`
-- `--ink` → deep coffee `#2a2620`
-- `--ink-soft` → warm grey `#6e6358`
-- `--brand` → deep paprika `#a8351a` (bold accent for buttons, prices, callouts)
-- `--accent` → olive green `#7a8a3a` (secondary pop — tags, "popular", icons)
-- `--rule` → ink @ 14%
+1. **Remove the split-screen hero entirely.** Delete the left column (big "DEV'S KITCHEN" stacked headline, tagline, Pre-Order/Contact buttons) and the right column (single signature image with brand sticker).
 
-Bold + casual cues, not just palette:
-- Slightly looser headings (less tight tracking)
-- Friendlier copy tone in section labels (e.g. "What's cooking" instead of "On the menu")
-- Add small playful touches: a hand-drawn-feel underline under one headline word, rotated price tag on meal cards, oversized eyebrow numbers
+2. **Remove the "This Week's Batch" section** (the `02 / Menu` block listing 6 items + "View Full Menu" button).
 
-## 2. New home page structure
+3. **New top of page (above the fold):**
+   - Thin top strip (small, single line): `Week of {label} · Pickup {sat.label}` on the left, `Orders close Thu 8pm` on the right. No big wordmark here — the site header already shows "Dev's Kitchen", so the hero wordmark is removed to kill the redundancy.
+   - Immediately below: **two big side-by-side meal cards** (stack on mobile) filling the viewport. Each card shows:
+     - Large image (tall aspect on mobile, ~4:5 on desktop)
+     - Meal name (display font, prominent but not viewport-eating)
+     - Price (paprika sticker, rotated −4°)
+     - 2–3 line description
+     - "Add to bag" (olive outline) + "See more →" buttons
+   - Sized so both cards' images + names + descriptions are visible without scrolling on a standard laptop and mostly visible on mobile (image + name + price above fold, description just below).
 
-Replace the current home with this order:
+4. **Keep below the fold:** owner/story section, How-It-Works 1·2·3, contact/pickup CTA, floating pre-order button. Drop the standalone testimonial-only section to keep the page tight (owner story already carries voice).
 
-```text
-┌─────────────────────────────────────────┐
-│ Tiny header strip:                      │
-│   "Week of Jun 15 · Pickup Sat"         │
-│   "Orders close Thu 8pm"                │
-├─────────────────────────────────────────┤
-│ TWO MEAL CARDS — side by side (stack on mobile) │
-│ ┌──────────────┐  ┌──────────────┐      │
-│ │  big image   │  │  big image   │      │
-│ │  Meal name   │  │  Meal name   │      │
-│ │  $price tag  │  │  $price tag  │      │
-│ │  description │  │  description │      │
-│ │  [Add to bag]│  │  [Add to bag]│      │
-│ └──────────────┘  └──────────────┘      │
-├─────────────────────────────────────────┤
-│ Quick info strip: pickup day · window · │
-│ address (paprika icons, olive labels)   │
-├─────────────────────────────────────────┤
-│ Owner note (kept, slightly warmer copy) │
-├─────────────────────────────────────────┤
-│ How it works — 1·2·3 (kept, restyled)   │
-└─────────────────────────────────────────┘
+5. **Meal selection:** use `items.filter(i => i.featured && !i.soldOut).slice(0, 2)` so the two weekly meals are data-driven. Fall back gracefully if fewer than 2.
 
-Floating pre-order CTA: kept as-is (mobile sticky).
-```
-
-The two meals come from the existing `items` store — show the first two non-sold-out items as the "this week" meals. Each card links to the existing `/menu/$itemId` detail page for full ordering.
-
-## 3. Remove the standalone menu
-
-- Delete `src/routes/menu.tsx` (the list page)
-- Keep `src/routes/menu.$itemId.tsx` (item detail still needed for add-to-cart flow)
-- Remove the "Menu" link from `SiteChrome` nav
-- Update any `<Link to="/menu">` on the home page to point to the first meal's detail, or just remove (the meals are right there)
-
-## 4. Casual/fun visual moves
-
-- Meal card: image fills top, name in display font, **price as a rotated paprika-red sticker** in the corner (–4°), description in body, big olive-outlined "Add to bag" button
-- Eyebrow numbers in How-It-Works rendered huge in olive
-- One headline word ("kitchen" or "cooking") gets a hand-drawn paprika underline (inline SVG squiggle)
-- Replace ALL-CAPS headlines with sentence case in a couple spots to feel less editorial / more personal
-
-## 5. Files touched
-
-- `src/styles.css` — palette tokens + add `--color-accent` mapping for olive utility
-- `src/routes/index.tsx` — full rewrite around new structure
-- `src/components/SiteChrome.tsx` — drop Menu link, lightly retone
-- `rm src/routes/menu.tsx`
-- (No image regeneration this round — existing meal photos work. If they clash after the palette swap we can revisit.)
+## Files
+- `src/routes/index.tsx` — restructure as above. No other files change.
 
 ## Out of scope
-
-- Admin pages (palette inherits automatically)
-- Cart / checkout layout changes
-- New food photography
+- Header/SiteChrome (already shows the single brand name — leaving it as the only instance).
+- Palette, fonts, admin, cart/checkout, new imagery.
