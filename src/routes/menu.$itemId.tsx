@@ -21,7 +21,7 @@ function ItemDetail() {
       <div className="px-5 md:px-12 max-w-3xl mx-auto py-20 text-center">
         <p className="eyebrow mb-4">Not found</p>
         <h1 className="font-display text-3xl uppercase mb-4">That dish isn't on the menu this week</h1>
-        <Link to="/menu" className="text-brand underline">Back to menu</Link>
+        <Link to="/" className="text-brand underline">Back to menu</Link>
       </div>
     );
   }
@@ -33,7 +33,7 @@ function ItemDetail() {
           <img src={item.image} alt={item.name} className="w-full h-full object-cover aspect-square md:aspect-auto" />
         </div>
         <div className="px-5 md:px-12 py-10 md:py-14 flex flex-col">
-          <Link to="/menu" className="eyebrow mb-6 hover:text-brand">← Back to menu</Link>
+          <Link to="/" className="eyebrow mb-6 hover:text-brand">← Back to menu</Link>
           <div className="flex gap-2 mb-3">
             {item.featured && <span className="text-[10px] font-bold uppercase tracking-[0.2em] bg-brand text-brand-ink px-2 py-1">Featured</span>}
             {item.popular && <span className="text-[10px] font-bold uppercase tracking-[0.2em] border border-ink/20 px-2 py-1">Popular</span>}
@@ -90,7 +90,7 @@ function ItemDetail() {
           )}
 
           {item.soldOut && (
-            <p className="text-sm text-ink-soft">This dish is sold out for this week's batch. <Link to="/menu" className="text-brand underline">See what's still available →</Link></p>
+            <p className="text-sm text-ink-soft">This dish is sold out for this week's batch. <Link to="/" className="text-brand underline">See what's still available →</Link></p>
           )}
         </div>
       </div>

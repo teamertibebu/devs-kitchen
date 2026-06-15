@@ -26,7 +26,7 @@ function Account() {
         <p className="text-ink-soft mb-8">Sign in or create an account to see order history, reorder in a tap, and skip filling out contact info.</p>
         <div className="flex gap-3 justify-center">
           <Link to="/auth" className="bg-brand text-brand-ink px-6 py-3 font-bold uppercase text-xs tracking-[0.2em]">Sign in / Sign up</Link>
-          <Link to="/menu" className="border border-ink/20 px-6 py-3 font-bold uppercase text-xs tracking-[0.2em]">Continue as guest</Link>
+          <Link to="/" className="border border-ink/20 px-6 py-3 font-bold uppercase text-xs tracking-[0.2em]">Continue as guest</Link>
         </div>
       </div>
     );
@@ -47,7 +47,7 @@ function Account() {
         <div className="md:col-span-2">
           <h2 className="font-display text-2xl uppercase mb-5 border-b border-ink/15 pb-3">Order history</h2>
           {orders.length === 0 ? (
-            <p className="text-ink-soft">No orders yet. <Link to="/menu" className="text-brand underline">Start your first pre-order →</Link></p>
+            <p className="text-ink-soft">No orders yet. <Link to="/" className="text-brand underline">Start your first pre-order →</Link></p>
           ) : (
             <ul className="space-y-5">
               {orders.map((o) => {
