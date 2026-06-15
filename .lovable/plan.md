@@ -1,62 +1,77 @@
-## Warm Sand palette swap
+# Plan: Casual restructure + Olive & Paprika palette
 
-Replace the blue accent palette with the **Warm Sand** palette the user selected (`#faf8f5`, `#f0ebe3`, `#c9b99a`, `#8b7355`). Keep **Archivo Black + Hind** typography. Maintain all functionality — this is a pure design-system change.
+## 1. New palette — Olive & Paprika
 
-### Step 1: Update design tokens in `src/styles.css`
-Swap the `:root` token values:
-- `--bg`: warm white `#faf8f5` (was cool grey-blue)
-- `--paper`: keep near-white or slightly warm `#ffffff`
-- `--ink`: warm near-black `#2d2a26` (was cool blue-black)
-- `--ink-soft`: warm grey `#6b6560` (was cool grey)
-- `--rule`: warm black at 12% opacity
-- `--brand`: deep warm brown `#8b7355` (was electric blue) — the primary accent
-- `--brand-ink`: warm white/cream for text on brand backgrounds
-- `--secondary`: light sand `#f0ebe3`
-- `--muted`: light sand `#f0ebe3`
-- `--input`: warm ink at 15% opacity
-- `--ring`: the new brand brown
+Update `src/styles.css` design tokens:
+- `--bg` → warm cream `#f6f1e6`
+- `--paper` → near-white `#fbf7ed`
+- `--ink` → deep coffee `#2a2620`
+- `--ink-soft` → warm grey `#6e6358`
+- `--brand` → deep paprika `#a8351a` (bold accent for buttons, prices, callouts)
+- `--accent` → olive green `#7a8a3a` (secondary pop — tags, "popular", icons)
+- `--rule` → ink @ 14%
 
-Update the comment that still says "blue/white/light grey".
+Bold + casual cues, not just palette:
+- Slightly looser headings (less tight tracking)
+- Friendlier copy tone in section labels (e.g. "What's cooking" instead of "On the menu")
+- Add small playful touches: a hand-drawn-feel underline under one headline word, rotated price tag on meal cards, oversized eyebrow numbers
 
-### Step 2: Audit all `.tsx` files for hardcoded blue values
-Search for any hardcoded hex/OKLCH/RGB blue values or references to the old blue outside the token system. If any exist, replace with semantic tokens. Also check for any `selection:bg-brand`, `focus:border-brand`, `decoration-brand` — these resolve through tokens and should be fine, but verify visually.
+## 2. New home page structure
 
-Files to audit (known usages from context):
-- `src/components/SiteChrome.tsx`
-- `src/routes/index.tsx`
-- `src/routes/menu.tsx`
-- `src/routes/menu.$itemId.tsx`
-- `src/routes/cart.tsx`
-- `src/routes/checkout.tsx`
-- `src/routes/checkout.success.tsx`
-- `src/routes/about.tsx`
-- `src/routes/contact.tsx`
-- `src/routes/account.tsx`
-- `src/routes/auth.tsx`
-- `src/routes/admin.*.tsx` (all admin routes)
-- `src/routes/__root.tsx`
+Replace the current home with this order:
 
-### Step 3: Regenerate hero/food images with warmer tone
-Regenerate the 7 food/portrait images to match the warm sand palette — less cool blue lighting, more warm natural kitchen light. This prevents visual clash between the warm UI and cool-tinted photos. Target paths:
-- `src/assets/hero-pappardelle.jpg`
-- `src/assets/dish-focaccia.jpg`
-- `src/assets/dish-burrata.jpg`
-- `src/assets/dish-ragu.jpg`
-- `src/assets/dish-veg.jpg`
-- `src/assets/dish-cake.jpg`
-- `src/assets/owner.jpg`
+```text
+┌─────────────────────────────────────────┐
+│ Tiny header strip:                      │
+│   "Week of Jun 15 · Pickup Sat"         │
+│   "Orders close Thu 8pm"                │
+├─────────────────────────────────────────┤
+│ TWO MEAL CARDS — side by side (stack on mobile) │
+│ ┌──────────────┐  ┌──────────────┐      │
+│ │  big image   │  │  big image   │      │
+│ │  Meal name   │  │  Meal name   │      │
+│ │  $price tag  │  │  $price tag  │      │
+│ │  description │  │  description │      │
+│ │  [Add to bag]│  │  [Add to bag]│      │
+│ └──────────────┘  └──────────────┘      │
+├─────────────────────────────────────────┤
+│ Quick info strip: pickup day · window · │
+│ address (paprika icons, olive labels)   │
+├─────────────────────────────────────────┤
+│ Owner note (kept, slightly warmer copy) │
+├─────────────────────────────────────────┤
+│ How it works — 1·2·3 (kept, restyled)   │
+└─────────────────────────────────────────┘
 
-### Step 4: Verify no visual regressions
-Run a quick visual check (build + preview) to confirm:
-- Buttons on dark backgrounds still have enough contrast
-- The "Sold out" / "Popular" / "Featured" pills read clearly
-- Admin slot capacity bars are visible
-- Focus states on form inputs are visible
-- Mobile sticky CTA is readable
-- No lingering cool blue anywhere in the UI
+Floating pre-order CTA: kept as-is (mobile sticky).
+```
 
-### Out of scope
-- No layout changes
-- No copy/content changes beyond image prompts
-- No functionality changes
-- No new routes or components
+The two meals come from the existing `items` store — show the first two non-sold-out items as the "this week" meals. Each card links to the existing `/menu/$itemId` detail page for full ordering.
+
+## 3. Remove the standalone menu
+
+- Delete `src/routes/menu.tsx` (the list page)
+- Keep `src/routes/menu.$itemId.tsx` (item detail still needed for add-to-cart flow)
+- Remove the "Menu" link from `SiteChrome` nav
+- Update any `<Link to="/menu">` on the home page to point to the first meal's detail, or just remove (the meals are right there)
+
+## 4. Casual/fun visual moves
+
+- Meal card: image fills top, name in display font, **price as a rotated paprika-red sticker** in the corner (–4°), description in body, big olive-outlined "Add to bag" button
+- Eyebrow numbers in How-It-Works rendered huge in olive
+- One headline word ("kitchen" or "cooking") gets a hand-drawn paprika underline (inline SVG squiggle)
+- Replace ALL-CAPS headlines with sentence case in a couple spots to feel less editorial / more personal
+
+## 5. Files touched
+
+- `src/styles.css` — palette tokens + add `--color-accent` mapping for olive utility
+- `src/routes/index.tsx` — full rewrite around new structure
+- `src/components/SiteChrome.tsx` — drop Menu link, lightly retone
+- `rm src/routes/menu.tsx`
+- (No image regeneration this round — existing meal photos work. If they clash after the palette swap we can revisit.)
+
+## Out of scope
+
+- Admin pages (palette inherits automatically)
+- Cart / checkout layout changes
+- New food photography

@@ -36,7 +36,7 @@ function Checkout() {
     return (
       <div className="px-5 max-w-3xl mx-auto py-20 text-center">
         <p>Your bag is empty.</p>
-        <Link to="/menu" className="text-brand underline mt-4 inline-block">See the menu →</Link>
+        <Link to="/" className="text-brand underline mt-4 inline-block">See the menu →</Link>
       </div>
     );
   }

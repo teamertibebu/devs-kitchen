@@ -32,7 +32,6 @@ function Header() {
           {business.name}
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          <Link to="/menu" className="hover:text-brand transition-colors">Menu</Link>
           <Link to="/about" className="hover:text-brand transition-colors">About</Link>
           <Link to="/contact" className="hover:text-brand transition-colors">Contact</Link>
           <Link to="/account" className="hover:text-brand transition-colors">Account</Link>
@@ -49,7 +48,6 @@ function Header() {
         <div className="md:hidden border-t border-rule bg-paper">
           <nav className="px-5 py-4 flex flex-col gap-1 text-base">
             {[
-              ["/menu", "Menu"],
               ["/about", "About"],
               ["/contact", "Contact"],
               ["/account", "Account"],
@@ -119,7 +117,7 @@ function MobileStickyCTA() {
   ) return null;
 
   const hasCart = hydrated && cartCount > 0;
-  const to = hasCart ? "/cart" : "/menu";
+  const to = hasCart ? "/cart" : "/";
   const label = hasCart ? `Review Bag (${cartCount})` : "Pre-Order Now";
 
   return (
