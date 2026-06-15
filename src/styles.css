@@ -37,6 +37,7 @@
   --color-paper: var(--paper);
   --color-brand: var(--brand);
   --color-brand-ink: var(--brand-ink);
+  --color-olive: var(--olive);
 
   --font-display: "Archivo Black", system-ui, sans-serif;
   --font-body: "Hind", system-ui, sans-serif;
