@@ -117,7 +117,7 @@ function MobileStickyCTA() {
   ) return null;
 
   const hasCart = hydrated && cartCount > 0;
-  const to = hasCart ? "/cart" : "/menu";
+  const to = hasCart ? "/cart" : "/";
   const label = hasCart ? `Review Bag (${cartCount})` : "Pre-Order Now";
 
   return (
