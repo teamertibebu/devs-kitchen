@@ -5,12 +5,20 @@ import { toast } from "sonner";
 import { Minus, Plus } from "lucide-react";
 
 export const Route = createFileRoute("/menu/$itemId")({
+  head: ({ params }) => {
+    // We can't easily get the item name here because we don't have the store
+    // but we can at least set a generic title with the business name
+    return {
+      meta: [{ title: `Details — DEV'S\u00a0KITCHEN` }],
+    };
+  },
   component: ItemDetail,
 });
 
 function ItemDetail() {
   const { itemId } = Route.useParams();
   const item = useStore((s) => s.items.find((i) => i.id === itemId));
+  const business = useStore((s) => s.business);
   const addToCart = useStore((s) => s.addToCart);
   const navigate = useNavigate();
   const [qty, setQty] = useState(1);
