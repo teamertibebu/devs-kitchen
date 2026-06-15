@@ -9,7 +9,7 @@ const search = z.object({ id: z.string().optional() });
 
 export const Route = createFileRoute("/checkout/success")({
   validateSearch: search,
-  head: () => ({ meta: [{ title: "Order received — Dev's Kitchen" }] }),
+  head: () => ({ meta: [{ title: "Order received — DEV'S\u00a0KITCHEN" }] }),
   component: Success,
 });
 
