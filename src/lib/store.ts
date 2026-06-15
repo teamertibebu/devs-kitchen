@@ -235,8 +235,8 @@ const seedBusiness: Business = {
   address: "1244 Harbor View Dr · Apt 4B",
   neighborhood: "San Francisco, CA",
   phone: "(415) 555-0142",
-  instagram: "@coastalkitchen_sf",
-  email: "hello@coastalkitchen.example",
+  instagram: "@Dev'skitchen_sf",
+  email: "hello@Dev'skitchen.example",
   hours: "Pickup Saturdays 11–2pm",
 };
 
@@ -244,7 +244,7 @@ const seedReminders: Reminders = {
   dayBefore: true,
   hoursBefore: 2,
   template:
-    "Hi {{name}} — friendly reminder your Coastal Kitchen pickup is {{pickup}}. Address: 1244 Harbor View Dr, Apt 4B. See you soon! — Elena",
+    "Hi {{name}} — friendly reminder your Dev's Kitchen pickup is {{pickup}}. Address: 1244 Harbor View Dr, Apt 4B. See you soon! — Elena",
 };
 
 // ---------- Store ----------
@@ -378,7 +378,7 @@ export const useStore = create<State>()(
       setAccount: (a) => set({ account: a }),
     }),
     {
-      name: "coastal-kitchen-v1",
+      name: "Dev's-kitchen-v1",
       storage: createJSONStorage(() =>
         typeof window !== "undefined" ? localStorage : (undefined as unknown as Storage),
       ),

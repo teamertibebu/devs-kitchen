@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useStore } from "@/lib/store";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Sign in — Coastal Kitchen" }] }),
+  head: () => ({ meta: [{ title: "Sign in — Dev's Kitchen" }] }),
   component: Auth,
 });
 
@@ -23,16 +23,22 @@ function Auth() {
   return (
     <div className="px-5 md:px-12 max-w-md mx-auto py-12 md:py-20">
       <span className="eyebrow block mb-3">{mode === "in" ? "Sign in" : "Create account"}</span>
-      <h1 className="font-display text-4xl md:text-5xl uppercase leading-tight mb-3">{mode === "in" ? "Welcome back" : "Save your info"}</h1>
+      <h1 className="font-display text-4xl md:text-5xl uppercase leading-tight mb-3">
+        {mode === "in" ? "Welcome back" : "Save your info"}
+      </h1>
       <p className="text-ink-soft mb-8 text-sm">
         {mode === "in" ? "Sign in to see your past orders." : "Optional — guest checkout works too."}
       </p>
 
       <form onSubmit={submit} className="space-y-4">
-        {mode === "up" && (
-          <Field label="Name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} />
-        )}
-        <Field label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} required />
+        {mode === "up" && <Field label="Name" value={form.name} onChange={(v) => setForm({ ...form, name: v })} />}
+        <Field
+          label="Email"
+          type="email"
+          value={form.email}
+          onChange={(v) => setForm({ ...form, email: v })}
+          required
+        />
         {mode === "up" && (
           <Field label="Phone" type="tel" value={form.phone} onChange={(v) => setForm({ ...form, phone: v })} />
         )}
@@ -40,7 +46,10 @@ function Auth() {
           <Field label="Password" type="password" value="" onChange={() => {}} placeholder="••••••••" />
         )}
 
-        <button type="submit" className="w-full bg-brand text-brand-ink py-4 font-bold uppercase text-xs tracking-[0.2em]">
+        <button
+          type="submit"
+          className="w-full bg-brand text-brand-ink py-4 font-bold uppercase text-xs tracking-[0.2em]"
+        >
           {mode === "in" ? "Sign in" : "Create account"}
         </button>
       </form>
@@ -56,11 +65,32 @@ function Auth() {
   );
 }
 
-function Field({ label, value, onChange, type = "text", required, placeholder }: { label: string; value: string; onChange: (v: string) => void; type?: string; required?: boolean; placeholder?: string }) {
+function Field({
+  label,
+  value,
+  onChange,
+  type = "text",
+  required,
+  placeholder,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  type?: string;
+  required?: boolean;
+  placeholder?: string;
+}) {
   return (
     <label className="block">
       <span className="eyebrow block mb-1.5">{label}</span>
-      <input type={type} value={value} required={required} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} className="w-full border border-ink/20 bg-paper p-3 text-base font-body focus:outline-none focus:border-brand" />
+      <input
+        type={type}
+        value={value}
+        required={required}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full border border-ink/20 bg-paper p-3 text-base font-body focus:outline-none focus:border-brand"
+      />
     </label>
   );
 }

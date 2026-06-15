@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MenuRouteImport } from './routes/menu'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
@@ -28,6 +29,11 @@ import { Route as AdminBusinessRouteImport } from './routes/admin.business'
 import { Route as AdminMenuNewRouteImport } from './routes/admin.menu.new'
 import { Route as AdminMenuIdRouteImport } from './routes/admin.menu.$id'
 
+const MenuRoute = MenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -74,9 +80,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   getParentRoute: () => AdminRoute,
 } as any)
 const MenuItemIdRoute = MenuItemIdRouteImport.update({
-  id: '/menu/$itemId',
-  path: '/menu/$itemId',
-  getParentRoute: () => rootRouteImport,
+  id: '/$itemId',
+  path: '/$itemId',
+  getParentRoute: () => MenuRoute,
 } as any)
 const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
   id: '/success',
@@ -128,6 +134,7 @@ export interface FileRoutesByFullPath {
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
+  '/menu': typeof MenuRouteWithChildren
   '/admin/business': typeof AdminBusinessRoute
   '/admin/menu': typeof AdminMenuRouteWithChildren
   '/admin/orders': typeof AdminOrdersRoute
@@ -147,6 +154,7 @@ export interface FileRoutesByTo {
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
+  '/menu': typeof MenuRouteWithChildren
   '/admin/business': typeof AdminBusinessRoute
   '/admin/menu': typeof AdminMenuRouteWithChildren
   '/admin/orders': typeof AdminOrdersRoute
@@ -168,6 +176,7 @@ export interface FileRoutesById {
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRouteWithChildren
   '/contact': typeof ContactRoute
+  '/menu': typeof MenuRouteWithChildren
   '/admin/business': typeof AdminBusinessRoute
   '/admin/menu': typeof AdminMenuRouteWithChildren
   '/admin/orders': typeof AdminOrdersRoute
@@ -190,6 +199,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/checkout'
     | '/contact'
+    | '/menu'
     | '/admin/business'
     | '/admin/menu'
     | '/admin/orders'
@@ -209,6 +219,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/checkout'
     | '/contact'
+    | '/menu'
     | '/admin/business'
     | '/admin/menu'
     | '/admin/orders'
@@ -229,6 +240,7 @@ export interface FileRouteTypes {
     | '/cart'
     | '/checkout'
     | '/contact'
+    | '/menu'
     | '/admin/business'
     | '/admin/menu'
     | '/admin/orders'
@@ -250,11 +262,18 @@ export interface RootRouteChildren {
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRouteWithChildren
   ContactRoute: typeof ContactRoute
-  MenuItemIdRoute: typeof MenuItemIdRoute
+  MenuRoute: typeof MenuRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/menu': {
+      id: '/menu'
+      path: '/menu'
+      fullPath: '/menu'
+      preLoaderRoute: typeof MenuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -320,10 +339,10 @@ declare module '@tanstack/react-router' {
     }
     '/menu/$itemId': {
       id: '/menu/$itemId'
-      path: '/menu/$itemId'
+      path: '/$itemId'
       fullPath: '/menu/$itemId'
       preLoaderRoute: typeof MenuItemIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof MenuRoute
     }
     '/checkout/success': {
       id: '/checkout/success'
@@ -430,6 +449,16 @@ const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
   CheckoutRouteChildren,
 )
 
+interface MenuRouteChildren {
+  MenuItemIdRoute: typeof MenuItemIdRoute
+}
+
+const MenuRouteChildren: MenuRouteChildren = {
+  MenuItemIdRoute: MenuItemIdRoute,
+}
+
+const MenuRouteWithChildren = MenuRoute._addFileChildren(MenuRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -439,7 +468,7 @@ const rootRouteChildren: RootRouteChildren = {
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRouteWithChildren,
   ContactRoute: ContactRoute,
-  MenuItemIdRoute: MenuItemIdRoute,
+  MenuRoute: MenuRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
