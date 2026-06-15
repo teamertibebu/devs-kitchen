@@ -5,13 +5,13 @@ import ownerImg from "@/assets/owner.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Dev's Kitchen — Weekly Pre-Order for Saturday Pickup" },
+      { title: "DEV'S\u00a0KITCHEN — Weekly Pre-Order for Saturday Pickup" },
       {
         name: "description",
         content:
           "Hand-rolled pasta and slow-fermented bread from a home kitchen. Pre-order this week's batch for Saturday pickup in San Francisco.",
       },
-      { property: "og:title", content: "Dev's Kitchen" },
+      { property: "og:title", content: "DEV'S\u00a0KITCHEN" },
       { property: "og:description", content: "Pre-order this week's batch for Saturday pickup." },
     ],
   }),
