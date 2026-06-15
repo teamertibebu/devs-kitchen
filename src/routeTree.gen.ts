@@ -9,38 +9,320 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MenuRouteImport } from './routes/menu'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AccountRouteImport } from './routes/account'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as MenuItemIdRouteImport } from './routes/menu.$itemId'
+import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
+import { Route as AdminScheduleRouteImport } from './routes/admin.schedule'
+import { Route as AdminRemindersRouteImport } from './routes/admin.reminders'
+import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
+import { Route as AdminMenuRouteImport } from './routes/admin.menu'
+import { Route as AdminBusinessRouteImport } from './routes/admin.business'
+import { Route as AdminMenuNewRouteImport } from './routes/admin.menu.new'
+import { Route as AdminMenuIdRouteImport } from './routes/admin.menu.$id'
 
+const MenuRoute = MenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const MenuItemIdRoute = MenuItemIdRouteImport.update({
+  id: '/$itemId',
+  path: '/$itemId',
+  getParentRoute: () => MenuRoute,
+} as any)
+const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
+  id: '/success',
+  path: '/success',
+  getParentRoute: () => CheckoutRoute,
+} as any)
+const AdminScheduleRoute = AdminScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminRemindersRoute = AdminRemindersRouteImport.update({
+  id: '/reminders',
+  path: '/reminders',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOrdersRoute = AdminOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMenuRoute = AdminMenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBusinessRoute = AdminBusinessRouteImport.update({
+  id: '/business',
+  path: '/business',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMenuNewRoute = AdminMenuNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminMenuRoute,
+} as any)
+const AdminMenuIdRoute = AdminMenuIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdminMenuRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/menu': typeof MenuRouteWithChildren
+  '/admin/business': typeof AdminBusinessRoute
+  '/admin/menu': typeof AdminMenuRouteWithChildren
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/reminders': typeof AdminRemindersRoute
+  '/admin/schedule': typeof AdminScheduleRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
+  '/menu/$itemId': typeof MenuItemIdRoute
+  '/admin/': typeof AdminIndexRoute
+  '/admin/menu/$id': typeof AdminMenuIdRoute
+  '/admin/menu/new': typeof AdminMenuNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/auth': typeof AuthRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/menu': typeof MenuRouteWithChildren
+  '/admin/business': typeof AdminBusinessRoute
+  '/admin/menu': typeof AdminMenuRouteWithChildren
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/reminders': typeof AdminRemindersRoute
+  '/admin/schedule': typeof AdminScheduleRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
+  '/menu/$itemId': typeof MenuItemIdRoute
+  '/admin': typeof AdminIndexRoute
+  '/admin/menu/$id': typeof AdminMenuIdRoute
+  '/admin/menu/new': typeof AdminMenuNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/account': typeof AccountRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRouteWithChildren
+  '/contact': typeof ContactRoute
+  '/menu': typeof MenuRouteWithChildren
+  '/admin/business': typeof AdminBusinessRoute
+  '/admin/menu': typeof AdminMenuRouteWithChildren
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/reminders': typeof AdminRemindersRoute
+  '/admin/schedule': typeof AdminScheduleRoute
+  '/checkout/success': typeof CheckoutSuccessRoute
+  '/menu/$itemId': typeof MenuItemIdRoute
+  '/admin/': typeof AdminIndexRoute
+  '/admin/menu/$id': typeof AdminMenuIdRoute
+  '/admin/menu/new': typeof AdminMenuNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/account'
+    | '/admin'
+    | '/auth'
+    | '/cart'
+    | '/checkout'
+    | '/contact'
+    | '/menu'
+    | '/admin/business'
+    | '/admin/menu'
+    | '/admin/orders'
+    | '/admin/reminders'
+    | '/admin/schedule'
+    | '/checkout/success'
+    | '/menu/$itemId'
+    | '/admin/'
+    | '/admin/menu/$id'
+    | '/admin/menu/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/account'
+    | '/auth'
+    | '/cart'
+    | '/checkout'
+    | '/contact'
+    | '/menu'
+    | '/admin/business'
+    | '/admin/menu'
+    | '/admin/orders'
+    | '/admin/reminders'
+    | '/admin/schedule'
+    | '/checkout/success'
+    | '/menu/$itemId'
+    | '/admin'
+    | '/admin/menu/$id'
+    | '/admin/menu/new'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/account'
+    | '/admin'
+    | '/auth'
+    | '/cart'
+    | '/checkout'
+    | '/contact'
+    | '/menu'
+    | '/admin/business'
+    | '/admin/menu'
+    | '/admin/orders'
+    | '/admin/reminders'
+    | '/admin/schedule'
+    | '/checkout/success'
+    | '/menu/$itemId'
+    | '/admin/'
+    | '/admin/menu/$id'
+    | '/admin/menu/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AccountRoute: typeof AccountRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRouteWithChildren
+  ContactRoute: typeof ContactRoute
+  MenuRoute: typeof MenuRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/menu': {
+      id: '/menu'
+      path: '/menu'
+      fullPath: '/menu'
+      preLoaderRoute: typeof MenuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +330,145 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/menu/$itemId': {
+      id: '/menu/$itemId'
+      path: '/$itemId'
+      fullPath: '/menu/$itemId'
+      preLoaderRoute: typeof MenuItemIdRouteImport
+      parentRoute: typeof MenuRoute
+    }
+    '/checkout/success': {
+      id: '/checkout/success'
+      path: '/success'
+      fullPath: '/checkout/success'
+      preLoaderRoute: typeof CheckoutSuccessRouteImport
+      parentRoute: typeof CheckoutRoute
+    }
+    '/admin/schedule': {
+      id: '/admin/schedule'
+      path: '/schedule'
+      fullPath: '/admin/schedule'
+      preLoaderRoute: typeof AdminScheduleRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reminders': {
+      id: '/admin/reminders'
+      path: '/reminders'
+      fullPath: '/admin/reminders'
+      preLoaderRoute: typeof AdminRemindersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/orders': {
+      id: '/admin/orders'
+      path: '/orders'
+      fullPath: '/admin/orders'
+      preLoaderRoute: typeof AdminOrdersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/menu': {
+      id: '/admin/menu'
+      path: '/menu'
+      fullPath: '/admin/menu'
+      preLoaderRoute: typeof AdminMenuRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/business': {
+      id: '/admin/business'
+      path: '/business'
+      fullPath: '/admin/business'
+      preLoaderRoute: typeof AdminBusinessRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/menu/new': {
+      id: '/admin/menu/new'
+      path: '/new'
+      fullPath: '/admin/menu/new'
+      preLoaderRoute: typeof AdminMenuNewRouteImport
+      parentRoute: typeof AdminMenuRoute
+    }
+    '/admin/menu/$id': {
+      id: '/admin/menu/$id'
+      path: '/$id'
+      fullPath: '/admin/menu/$id'
+      preLoaderRoute: typeof AdminMenuIdRouteImport
+      parentRoute: typeof AdminMenuRoute
+    }
   }
 }
 
+interface AdminMenuRouteChildren {
+  AdminMenuIdRoute: typeof AdminMenuIdRoute
+  AdminMenuNewRoute: typeof AdminMenuNewRoute
+}
+
+const AdminMenuRouteChildren: AdminMenuRouteChildren = {
+  AdminMenuIdRoute: AdminMenuIdRoute,
+  AdminMenuNewRoute: AdminMenuNewRoute,
+}
+
+const AdminMenuRouteWithChildren = AdminMenuRoute._addFileChildren(
+  AdminMenuRouteChildren,
+)
+
+interface AdminRouteChildren {
+  AdminBusinessRoute: typeof AdminBusinessRoute
+  AdminMenuRoute: typeof AdminMenuRouteWithChildren
+  AdminOrdersRoute: typeof AdminOrdersRoute
+  AdminRemindersRoute: typeof AdminRemindersRoute
+  AdminScheduleRoute: typeof AdminScheduleRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminBusinessRoute: AdminBusinessRoute,
+  AdminMenuRoute: AdminMenuRouteWithChildren,
+  AdminOrdersRoute: AdminOrdersRoute,
+  AdminRemindersRoute: AdminRemindersRoute,
+  AdminScheduleRoute: AdminScheduleRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface CheckoutRouteChildren {
+  CheckoutSuccessRoute: typeof CheckoutSuccessRoute
+}
+
+const CheckoutRouteChildren: CheckoutRouteChildren = {
+  CheckoutSuccessRoute: CheckoutSuccessRoute,
+}
+
+const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
+  CheckoutRouteChildren,
+)
+
+interface MenuRouteChildren {
+  MenuItemIdRoute: typeof MenuItemIdRoute
+}
+
+const MenuRouteChildren: MenuRouteChildren = {
+  MenuItemIdRoute: MenuItemIdRoute,
+}
+
+const MenuRouteWithChildren = MenuRoute._addFileChildren(MenuRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AccountRoute: AccountRoute,
+  AdminRoute: AdminRouteWithChildren,
+  AuthRoute: AuthRoute,
+  CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRouteWithChildren,
+  ContactRoute: ContactRoute,
+  MenuRoute: MenuRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
