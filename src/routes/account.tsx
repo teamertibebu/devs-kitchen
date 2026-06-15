@@ -3,7 +3,7 @@ import { useStore, fmtMoney } from "@/lib/store";
 import { useHydrated } from "@/lib/hydrate";
 
 export const Route = createFileRoute("/account")({
-  head: () => ({ meta: [{ title: "Your Account — Dev's Kitchen" }] }),
+  head: () => ({ meta: [{ title: "Your Account — DEV'S\u00a0KITCHEN" }] }),
   component: Account,
 });
 

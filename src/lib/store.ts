@@ -225,7 +225,7 @@ const seedSchedule: Schedule = {
 };
 
 const seedBusiness: Business = {
-  name: "Dev's Kitchen",
+  name: "DEV'S\u00a0KITCHEN",
   tagline: "Hand-rolled pasta and slow-fermented bread, made one weekend at a time.",
   signatureDish: { name: "Hand-Cut Pappardelle", price: 24 },
   story:

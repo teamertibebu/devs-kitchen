@@ -6,7 +6,7 @@ import { useHydrated } from "@/lib/hydrate";
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Your Bag — Dev's Kitchen" },
+      { title: "Your Bag — DEV'S\u00a0KITCHEN" },
       { name: "description", content: "Review your pre-order before checkout." },
     ],
   }),
