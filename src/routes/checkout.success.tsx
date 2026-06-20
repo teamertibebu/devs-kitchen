@@ -28,7 +28,7 @@ function Success() {
     return (
       <div className="px-5 max-w-3xl mx-auto py-20 text-center">
         <h1 className="font-display text-3xl uppercase">No order found</h1>
-        <Link to="/menu" className="text-brand underline mt-4 inline-block">
+        <Link to="/" className="text-brand underline mt-4 inline-block">
           Back to menu →
         </Link>
       </div>

@@ -30,7 +30,7 @@ function Account() {
           <Link to="/auth" className="bg-brand text-brand-ink px-6 py-3 font-bold uppercase text-xs tracking-[0.2em]">
             Sign in / Sign up
           </Link>
-          <Link to="/menu" className="border border-ink/20 px-6 py-3 font-bold uppercase text-xs tracking-[0.2em]">
+          <Link to="/" className="border border-ink/20 px-6 py-3 font-bold uppercase text-xs tracking-[0.2em]">
             Continue as guest
           </Link>
         </div>
@@ -62,7 +62,7 @@ function Account() {
           {orders.length === 0 ? (
             <p className="text-ink-soft">
               No orders yet.{" "}
-              <Link to="/menu" className="text-brand underline">
+              <Link to="/" className="text-brand underline">
                 Start your first pre-order →
               </Link>
             </p>
