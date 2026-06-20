@@ -119,6 +119,7 @@ function Header() {
           </div>
         )}
       </header>
+      <TopContactBar />
     </>
   );
 }
