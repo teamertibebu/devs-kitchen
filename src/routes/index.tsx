@@ -53,14 +53,9 @@ function Home() {
             <h1 className="font-display text-3xl md:text-5xl uppercase tracking-tight leading-none">
               This week's Menu
             </h1>
-            <div className="mt-3 md:mt-4 inline-flex items-center gap-3 text-sm leading-tight">
-              <span className="w-9 h-9 rounded-full bg-white/10 grid place-items-center text-white">
-                <Clock className="size-4" />
-              </span>
-              <div className="text-left">
-                <p className="font-semibold text-white">Pickup Sat 11AM – 2PM</p>
-                <p className="text-ink-soft-on-dark text-xs">Orders close Thu 8PM</p>
-              </div>
+            <div className="mt-1 md:mt-2 text-sm leading-tight text-white">
+              <p className="font-semibold">Pickup Sat 11AM – 2PM</p>
+              <p className="text-ink-soft-on-dark text-xs">Orders close Thu 8PM</p>
             </div>
           </div>
 
