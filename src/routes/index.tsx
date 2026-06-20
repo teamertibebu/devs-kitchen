@@ -101,11 +101,6 @@ function Home() {
             ))}
           </div>
 
-          <p className="text-center mt-4 md:mt-8">
-            <Link to="/menu" className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm font-semibold">
-              See the full menu <ArrowRight className="size-4" />
-            </Link>
-          </p>
         </div>
       </section>
 
