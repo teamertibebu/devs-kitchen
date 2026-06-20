@@ -235,7 +235,7 @@ const seedBusiness: Business = {
   address: "1244 Harbor View Dr · Apt 4B",
   neighborhood: "San Francisco, CA",
   phone: "(415) 555-0142",
-  instagram: "devskitchen_sf",
+  instagram: "devhusk7",
   email: "hello@Dev'skitchen.example",
   hours: "Pickup Saturdays 11–2pm",
 };
@@ -383,7 +383,7 @@ export const useStore = create<State>()(
         typeof window !== "undefined" ? localStorage : (undefined as unknown as Storage),
       ),
       // Reseed images if the persisted version stored stale src paths from a previous build.
-      version: 2,
+      version: 3,
     },
   ),
 );
