@@ -31,69 +31,65 @@
   --color-ring: var(--ring);
 
   --color-bg: var(--bg);
-  --color-bg-dark: var(--bg-dark);
   --color-paper: var(--paper);
-  --color-paper-dark: var(--paper-dark);
   --color-ink: var(--ink);
-  --color-ink-on-dark: var(--ink-on-dark);
   --color-ink-soft: var(--ink-soft);
+  --color-ink-on-dark: var(--ink-on-dark);
   --color-ink-soft-on-dark: var(--ink-soft-on-dark);
   --color-rule: var(--rule);
   --color-rule-on-dark: var(--rule-on-dark);
+  --color-navy: var(--navy);
+  --color-cobalt: var(--cobalt);
+  --color-jet: var(--jet);
   --color-brand: var(--brand);
   --color-brand-ink: var(--brand-ink);
-  --color-mustard: var(--mustard);
-  --color-navy: var(--navy);
-  --color-olive: var(--mustard);
 
-  --font-display: "Alfa Slab One", Georgia, serif;
-  --font-script: "Caveat", "Comic Sans MS", cursive;
-  --font-body: "Bitter", Georgia, serif;
-  --font-sans: "Bitter", Georgia, serif;
+  --font-display: "Barlow Condensed", "Barlow", system-ui, sans-serif;
+  --font-body: "Barlow", system-ui, sans-serif;
+  --font-sans: "Barlow", system-ui, sans-serif;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root {
-  --radius: 0.25rem;
+  --radius: 9999px;
 
-  /* Retro Diner palette */
-  --bg: #fff8e7;           /* cream */
-  --paper: #fffdf5;        /* lighter cream card */
-  --bg-dark: #1a3c5a;      /* navy */
-  --paper-dark: #234a6b;
-  --ink: #1a3c5a;          /* navy ink */
-  --ink-on-dark: #fff8e7;
-  --ink-soft: #5a6b7a;
-  --ink-soft-on-dark: #cfd9e3;
-  --rule: rgba(26, 60, 90, 0.18);
-  --rule-on-dark: rgba(255, 248, 231, 0.2);
+  /* ATL Wonder-inspired palette: deep navy + cobalt + jet black */
+  --navy: #0a1a3a;
+  --cobalt: #4d7cff;
+  --jet: #0a0a0e;
+  --bg: #ffffff;
+  --paper: #f5f7fb;
+  --ink: #0a1a3a;
+  --ink-soft: #5a6478;
+  --ink-on-dark: #ffffff;
+  --ink-soft-on-dark: #b8c4dc;
+  --rule: rgba(10, 26, 58, 0.12);
+  --rule-on-dark: rgba(255, 255, 255, 0.14);
 
-  --brand: #d4232a;        /* tomato red */
-  --brand-ink: #fff8e7;
-  --mustard: #f4c430;
-  --navy: #1a3c5a;
+  --brand: var(--cobalt);
+  --brand-ink: #ffffff;
 
   /* Shadcn mappings */
   --background: var(--bg);
   --foreground: var(--ink);
   --card: var(--paper);
   --card-foreground: var(--ink);
-  --popover: var(--paper);
+  --popover: #ffffff;
   --popover-foreground: var(--ink);
-  --primary: var(--brand);
-  --primary-foreground: var(--brand-ink);
-  --secondary: var(--mustard);
+  --primary: var(--navy);
+  --primary-foreground: #ffffff;
+  --secondary: var(--paper);
   --secondary-foreground: var(--ink);
-  --muted: #f4ecd6;
+  --muted: var(--paper);
   --muted-foreground: var(--ink-soft);
-  --accent: var(--mustard);
-  --accent-foreground: var(--ink);
+  --accent: var(--cobalt);
+  --accent-foreground: #ffffff;
   --destructive: #c4322a;
-  --destructive-foreground: #fff8e7;
+  --destructive-foreground: #ffffff;
   --border: var(--rule);
-  --input: rgba(26, 60, 90, 0.2);
-  --ring: var(--brand);
+  --input: rgba(10, 26, 58, 0.2);
+  --ring: var(--cobalt);
 }
 
 @layer base {
@@ -109,80 +105,66 @@
   }
   .font-display {
     font-family: var(--font-display);
-    letter-spacing: 0.005em;
-  }
-  .font-script {
-    font-family: var(--font-script);
+    letter-spacing: -0.005em;
+    font-weight: 800;
   }
 }
 
 @utility eyebrow {
   font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   color: var(--color-ink-soft);
 }
 
-@utility section-dark {
-  background-color: var(--color-bg-dark);
+@utility section-navy {
+  background-color: var(--color-navy);
   color: var(--color-ink-on-dark);
 }
 
-/* Paper grain — subtle dotted noise overlay */
-@utility paper-grain {
-  position: relative;
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image: radial-gradient(rgba(26, 60, 90, 0.06) 1px, transparent 1px);
-    background-size: 4px 4px;
-    mix-blend-mode: multiply;
-    opacity: 0.5;
-  }
+@utility section-cobalt {
+  background-color: var(--color-cobalt);
+  color: #ffffff;
 }
 
-/* Dashed ticket border */
-@utility ticket {
-  background: var(--color-paper);
-  border: 2px dashed var(--color-navy);
-  box-shadow: 4px 4px 0 0 var(--color-navy);
-}
-
-/* Sticker price — rotated mustard pill */
-@utility sticker-price {
-  display: inline-block;
-  background: var(--color-mustard);
-  color: var(--color-navy);
-  font-family: var(--font-display);
-  padding: 0.25rem 0.75rem;
-  border: 2px solid var(--color-navy);
-  transform: rotate(-6deg);
-  box-shadow: 2px 2px 0 0 var(--color-navy);
-}
-
-@utility btn-diner {
+/* Rounded pill primary button — ATL Wonder style */
+@utility btn-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-brand);
-  color: var(--color-brand-ink);
-  font-family: var(--font-display);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  border: 2px solid var(--color-navy);
-  box-shadow: 3px 3px 0 0 var(--color-navy);
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  gap: 0.5rem;
+  background: var(--color-navy);
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  transition: background 0.15s ease, transform 0.15s ease;
   &:hover {
-    transform: translate(1px, 1px);
-    box-shadow: 2px 2px 0 0 var(--color-navy);
+    background: var(--color-cobalt);
+    transform: translateY(-1px);
   }
-  &:active {
-    transform: translate(3px, 3px);
-    box-shadow: 0 0 0 0 var(--color-navy);
+}
+
+@utility btn-pill-cobalt {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--color-cobalt);
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: background 0.15s ease, transform 0.15s ease;
+  &:hover {
+    background: var(--color-navy);
+    transform: translateY(-1px);
   }
 }
 
@@ -193,8 +175,4 @@
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-@keyframes wiggle {
-  0%, 100% { transform: rotate(-6deg); }
-  50% { transform: rotate(-3deg); }
 }

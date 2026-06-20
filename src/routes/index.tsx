@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { toast } from "sonner";
+import { ShoppingBag, ArrowRight } from "lucide-react";
 import { useStore, fmtMoney } from "@/lib/store";
 import { useHydrated } from "@/lib/hydrate";
 import ownerImg from "@/assets/owner.jpg";
@@ -38,129 +39,145 @@ function Home() {
 
   const handleAdd = (id: string, name: string) => {
     addToCart(id, 1);
-    toast.success(`${name} added to bag!`);
+    toast.success(`${name} added to your order`);
   };
 
   return (
-    <div className="pb-8">
-      {/* TODAY'S MENU — above the fold */}
-      <section className="px-3 md:px-8 pt-3 md:pt-5">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-end justify-between mb-2 md:mb-4 px-1">
-            <h1 className="font-script text-3xl md:text-5xl text-brand leading-none">today's menu</h1>
-            <span className="font-display text-[10px] md:text-xs text-navy uppercase tracking-widest hidden sm:inline">
-              {hydrated ? sat?.label : "Saturday"} pickup
-            </span>
+    <div>
+      {/* HERO — split cobalt/navy backdrop with two black meal cards */}
+      <section className="relative">
+        <div className="grid grid-cols-2 absolute inset-0 -z-10">
+          <div className="bg-cobalt" />
+          <div className="bg-navy" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-5 md:py-10">
+          <div className="text-center mb-4 md:mb-8 text-white">
+            <p className="eyebrow text-white/70 mb-1">This week's menu</p>
+            <h1 className="font-display text-3xl md:text-6xl uppercase tracking-tight leading-none">
+              Made by hand, every weekend
+            </h1>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {weekMeals.map((item, i) => (
               <article
                 key={item.id}
-                className="ticket relative p-2 md:p-3 animate-[slide-up_0.5s_var(--ease-out-expo)_both]"
-                style={{
-                  transform: `rotate(${i === 0 ? "-0.6" : "0.5"}deg)`,
-                  animationDelay: `${i * 0.08}s`,
-                }}
+                className="bg-jet text-white rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl flex flex-row md:flex-col animate-[slide-up_0.6s_var(--ease-out-expo)_both]"
+                style={{ animationDelay: `${i * 0.1}s` }}
               >
-                <div className="flex gap-3 md:gap-4 items-stretch">
-                  <Link
-                    to="/menu/$itemId"
-                    params={{ itemId: item.id }}
-                    className="relative block w-[38%] md:w-[42%] flex-shrink-0 overflow-hidden border-2 border-navy"
-                  >
-                    <div className="aspect-square">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                    <span className="sticker-price absolute -top-2 -right-2 text-sm md:text-base z-10">
-                      {fmtMoney(item.price).replace(".00", "")}
-                    </span>
-                  </Link>
+                <div className="relative w-[40%] md:w-full md:aspect-[4/3] flex-shrink-0">
+                  <img src={item.image} alt={item.name} className="absolute inset-0 w-full h-full object-cover" />
+                  <span className="absolute top-2 right-2 md:top-3 md:right-3 bg-cobalt text-white font-display text-sm md:text-lg px-3 py-1 rounded-full">
+                    {fmtMoney(item.price).replace(".00", "")}
+                  </span>
+                </div>
 
-                  <div className="flex-1 min-w-0 flex flex-col py-1">
-                    <h2 className="font-display text-base md:text-2xl leading-tight text-navy mb-1 md:mb-2 uppercase">
-                      {item.name}
-                    </h2>
-                    <p className="text-[11px] md:text-sm text-ink-soft leading-snug line-clamp-3 md:line-clamp-4 mb-2 md:mb-3 flex-1">
-                      {item.description}
-                    </p>
+                <div className="flex-1 min-w-0 flex flex-col p-3 md:p-6">
+                  <h2 className="font-display text-base md:text-2xl uppercase leading-tight mb-1 md:mb-2 line-clamp-2">
+                    {item.name}
+                  </h2>
+                  <p className="text-[12px] md:text-sm text-ink-soft-on-dark leading-snug line-clamp-2 md:line-clamp-3 mb-2 md:mb-4 flex-1">
+                    {item.description}
+                  </p>
+                  <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleAdd(item.id, item.name)}
-                      className="btn-diner w-full py-2 md:py-2.5 text-[11px] md:text-sm"
+                      className="btn-pill-cobalt flex-1 py-2 md:py-3 text-xs md:text-sm"
                     >
-                      + Add to bag
+                      <ShoppingBag className="size-4" /> Add to bag
                     </button>
+                    <Link
+                      to="/menu/$itemId"
+                      params={{ itemId: item.id }}
+                      className="hidden md:inline-flex w-10 h-10 rounded-full border border-white/20 items-center justify-center hover:bg-white/10"
+                      aria-label="See details"
+                    >
+                      <ArrowRight className="size-4" />
+                    </Link>
                   </div>
                 </div>
               </article>
             ))}
           </div>
 
-          <p className="text-center font-script text-xl md:text-2xl text-navy mt-3 md:mt-5">
-            see the full menu →{" "}
-            <Link to="/menu" className="text-brand underline decoration-wavy underline-offset-4">
-              this way
+          <p className="text-center mt-4 md:mt-8">
+            <Link to="/menu" className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm font-semibold">
+              See the full menu <ArrowRight className="size-4" />
             </Link>
           </p>
         </div>
       </section>
 
-      {/* BELOW THE FOLD */}
+      {/* PICKUP INFO STRIP */}
+      <section className="bg-white border-b border-rule">
+        <div className="max-w-7xl mx-auto px-5 md:px-10 py-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
+          {[
+            { eyebrow: "Pickup day", value: hydrated ? sat?.label : "Saturday" },
+            { eyebrow: "Window", value: `${sat?.slots[0].label.split(" — ")[0]} – ${sat?.slots[sat.slots.length - 1].label.split(" — ")[1]}` },
+            { eyebrow: "Where", value: business.neighborhood },
+          ].map((b) => (
+            <div key={b.eyebrow} className="text-center sm:text-left">
+              <p className="eyebrow text-cobalt mb-2">{b.eyebrow}</p>
+              <p className="font-display text-xl md:text-2xl uppercase text-navy">{b.value}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      {/* Owner story — paper card */}
-      <section className="px-5 md:px-8 mt-12 md:mt-20">
-        <div className="max-w-5xl mx-auto ticket p-6 md:p-10" style={{ transform: "rotate(-0.4deg)" }}>
-          <div className="grid grid-cols-1 md:grid-cols-[180px,1fr] gap-6 md:gap-10 items-center">
-            <div className="border-2 border-navy w-40 h-40 md:w-44 md:h-44 mx-auto" style={{ transform: "rotate(2deg)" }}>
-              <img src={ownerImg} alt={business.ownerName} className="w-full h-full object-cover" loading="lazy" />
-            </div>
-            <div>
-              <p className="font-script text-3xl md:text-4xl text-brand mb-2">hey, I'm {business.ownerName}!</p>
-              <p className="text-sm md:text-base leading-relaxed text-ink mb-3">{business.story}</p>
-              <p className="font-display text-xs uppercase tracking-widest text-navy">
-                ★ Cooked in my home kitchen ★
-              </p>
-            </div>
+      {/* OWNER / STORY */}
+      <section className="bg-paper">
+        <div className="max-w-6xl mx-auto px-5 md:px-10 py-16 md:py-24 grid grid-cols-1 md:grid-cols-[280px,1fr] gap-10 md:gap-16 items-center">
+          <div className="w-56 h-56 md:w-72 md:h-72 mx-auto md:mx-0 rounded-full overflow-hidden border-4 border-navy">
+            <img src={ownerImg} alt={business.ownerName} className="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <div>
+            <p className="eyebrow text-cobalt mb-3">About {business.ownerName}</p>
+            <h2 className="font-display text-3xl md:text-5xl uppercase text-navy leading-[0.95] tracking-tight mb-5">
+              One kitchen, one weekend at a time.
+            </h2>
+            <p className="text-base md:text-lg text-ink-soft leading-relaxed mb-6 max-w-2xl">{business.story}</p>
+            <Link to="/about" className="btn-pill">
+              More about Dev <ArrowRight className="size-4" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="px-5 md:px-8 mt-12 md:mt-16">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="font-script text-4xl md:text-5xl text-brand text-center mb-6 md:mb-10">
-            how it works
+      {/* HOW IT WORKS */}
+      <section className="section-navy">
+        <div className="max-w-6xl mx-auto px-5 md:px-10 py-16 md:py-24">
+          <p className="eyebrow text-cobalt mb-3 text-center">How it works</p>
+          <h2 className="font-display text-3xl md:text-5xl uppercase text-center mb-12 leading-none">
+            From kitchen to table
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {[
-              { n: "1", t: "Order by Thu", d: "Pick your meals & check out before 8pm Thursday." },
-              { n: "2", t: "We cook Sat", d: "Everything's made fresh that morning in small batches." },
-              { n: "3", t: "Pick up & eat", d: `Swing by ${business.neighborhood} during your window.` },
-            ].map((s, i) => (
-              <div
-                key={s.n}
-                className="ticket p-5 text-center"
-                style={{ transform: `rotate(${i === 1 ? "0.4" : i === 0 ? "-0.5" : "0.6"}deg)` }}
-              >
-                <div className="font-display text-5xl md:text-6xl text-brand leading-none mb-2">{s.n}</div>
-                <h3 className="font-display text-base md:text-lg uppercase text-navy mb-1.5">{s.t}</h3>
-                <p className="text-sm text-ink-soft">{s.d}</p>
+              { n: "01", t: "Order by Thursday", d: "Pick your meals and check out before 8pm Thursday." },
+              { n: "02", t: "We cook Saturday", d: "Everything's made fresh that morning in small batches." },
+              { n: "03", t: "Pick up & enjoy", d: `Swing by ${business.neighborhood} during your window.` },
+            ].map((s) => (
+              <div key={s.n} className="bg-jet rounded-2xl p-7">
+                <p className="font-display text-cobalt text-5xl md:text-6xl leading-none mb-4">{s.n}</p>
+                <h3 className="font-display text-xl uppercase mb-2">{s.t}</h3>
+                <p className="text-sm text-ink-soft-on-dark leading-relaxed">{s.d}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="px-5 md:px-8 mt-12 md:mt-16 text-center">
-        <p className="font-script text-3xl md:text-4xl text-brand mb-3">hungry?</p>
-        <Link to="/menu" className="btn-diner inline-block px-8 py-3 md:px-10 md:py-4 text-sm md:text-base">
-          See the full menu →
-        </Link>
+      {/* FINAL CTA */}
+      <section className="section-cobalt">
+        <div className="max-w-4xl mx-auto px-5 md:px-10 py-16 md:py-20 text-center">
+          <h2 className="font-display text-3xl md:text-5xl uppercase leading-none mb-5">
+            This week's batch is open
+          </h2>
+          <p className="text-white/85 mb-7 max-w-xl mx-auto">Place your order before Thursday at 8pm.</p>
+          <Link to="/menu" className="btn-pill bg-white text-navy hover:bg-jet hover:text-white">
+            <ShoppingBag className="size-4" /> See the menu
+          </Link>
+        </div>
       </section>
     </div>
   );
