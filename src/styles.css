@@ -31,13 +31,19 @@
   --color-ring: var(--ring);
 
   --color-bg: var(--bg);
+  --color-bg-dark: var(--bg-dark);
+  --color-paper-dark: var(--paper-dark);
   --color-ink: var(--ink);
+  --color-ink-on-dark: var(--ink-on-dark);
   --color-ink-soft: var(--ink-soft);
+  --color-ink-soft-on-dark: var(--ink-soft-on-dark);
   --color-rule: var(--rule);
+  --color-rule-on-dark: var(--rule-on-dark);
   --color-paper: var(--paper);
   --color-brand: var(--brand);
   --color-brand-ink: var(--brand-ink);
   --color-olive: var(--olive);
+
 
   --font-display: "Archivo Black", system-ui, sans-serif;
   --font-body: "Hind", system-ui, sans-serif;
