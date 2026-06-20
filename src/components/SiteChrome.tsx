@@ -100,12 +100,12 @@ function Footer() {
   return (
     <footer className="section-navy mt-16">
       <div className="max-w-7xl mx-auto px-5 md:px-10 py-8 md:py-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <p className="font-display text-xl uppercase mb-3">{business.name}</p>
+        <div className="grid grid-cols-2 gap-4 md:gap-8">
+          <div className="min-w-0">
+            <p className="font-display text-lg md:text-xl uppercase mb-3">{business.name}</p>
             <p className="text-[10px] uppercase tracking-widest text-ink-soft-on-dark">© {new Date().getFullYear()} {business.name} · <Link to="/admin" className="hover:text-cobalt">Owner</Link></p>
           </div>
-          <div>
+          <div className="min-w-0">
             <p className="eyebrow text-cobalt mb-3">Connect</p>
             <a href={`https://instagram.com/${business.instagram.replace("@", "")}`} className="text-sm block hover:text-cobalt mb-1">{business.instagram}</a>
             <a href={`mailto:${business.email}`} className="text-sm block hover:text-cobalt">{business.email}</a>
