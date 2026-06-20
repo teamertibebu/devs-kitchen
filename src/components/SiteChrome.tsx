@@ -96,7 +96,6 @@ function Header() {
             <nav className="px-5 py-3 flex flex-col">
               {[
                 ["/", "Home"],
-                ["/menu", "Menu"],
                 ["/about", "About"],
                 ["/contact", "Connect"],
                 ["/account", "Account"],
