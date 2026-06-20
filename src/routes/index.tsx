@@ -46,10 +46,7 @@ function Home() {
     <div>
       {/* HERO — split cobalt/navy backdrop with two black meal cards */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 grid grid-cols-2">
-          <div className="bg-cobalt" />
-          <div className="bg-navy" />
-        </div>
+        <div className="absolute inset-0 bg-gradient-to-br from-cobalt to-navy" />
 
         <div className="relative max-w-6xl mx-auto px-4 md:px-8 py-5 md:py-12">
           <div className="text-center mb-4 md:mb-8 text-white">
