@@ -131,19 +131,19 @@ function Footer() {
 
   return (
     <footer className="section-navy mt-16">
-      <div className="max-w-7xl mx-auto px-5 md:px-10 py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div className="md:col-span-2 flex items-start gap-4">
-          <span className="w-14 h-14 rounded-full bg-jet text-cobalt grid place-items-center font-display text-lg shrink-0">DK</span>
+      <div className="max-w-7xl mx-auto px-5 md:px-10 py-8 md:py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pb-6 border-b border-white/10">
           <div>
-            <p className="font-display text-2xl uppercase mb-2">{business.name}</p>
-            <p className="text-sm text-ink-soft-on-dark max-w-sm">{business.tagline}</p>
+            <p className="font-display text-xl uppercase">{business.name}</p>
+          </div>
+          <div>
+            <p className="eyebrow text-cobalt mb-3">Connect</p>
+            <a href={`https://instagram.com/${business.instagram.replace("@", "")}`} className="text-sm block hover:text-cobalt mb-1">{business.instagram}</a>
+            <a href={`mailto:${business.email}`} className="text-sm block hover:text-cobalt">{business.email}</a>
           </div>
         </div>
-        <div>
-          <p className="eyebrow text-cobalt mb-3">Connect</p>
-          <a href={`https://instagram.com/${business.instagram.replace("@", "")}`} className="text-sm block hover:text-cobalt mb-1">{business.instagram}</a>
-          <a href={`mailto:${business.email}`} className="text-sm block hover:text-cobalt">{business.email}</a>
-          <p className="text-[10px] uppercase tracking-widest text-ink-soft-on-dark mt-6">© {new Date().getFullYear()} {business.name} · <Link to="/admin" className="hover:text-cobalt">Owner</Link></p>
+        <div className="pt-6">
+          <p className="text-[10px] uppercase tracking-widest text-ink-soft-on-dark">© {new Date().getFullYear()} {business.name} · <Link to="/admin" className="hover:text-cobalt">Owner</Link></p>
         </div>
       </div>
     </footer>
