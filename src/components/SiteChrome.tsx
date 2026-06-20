@@ -7,13 +7,21 @@ import { useHydrated } from "@/lib/hydrate";
 
 function StatusStrip() {
   const schedule = useStore((s) => s.schedule);
+  const hydrated = useHydrated();
   const next = schedule.pickupDays[0];
   return (
     <div className="sticky top-0 z-50 bg-brand text-brand-ink py-2.5 px-4 text-center text-[11px] font-semibold uppercase tracking-[0.2em] animate-[fade-in_0.6s_var(--ease-out-expo)]">
-      Orders close Thu 8pm · Pickup {next?.label.split(",")[0]}
+      {hydrated ? (
+        <>
+          {schedule.weekLabel} · Orders close Thu 8pm · Pickup {next?.label.split(",")[0]}
+        </>
+      ) : (
+        <>Orders close Thu 8pm · Pickup Saturday</>
+      )}
     </div>
   );
 }
+
 
 function Header() {
   const [open, setOpen] = useState(false);
