@@ -122,8 +122,8 @@ function Home() {
 
       {/* OWNER / STORY */}
       <section className="bg-paper">
-        <div className="max-w-6xl mx-auto px-5 md:px-10 py-16 md:py-24 grid grid-cols-1 md:grid-cols-[280px,1fr] gap-10 md:gap-16 items-center">
-          <div className="w-56 h-56 md:w-72 md:h-72 mx-auto md:mx-0 rounded-full overflow-hidden border-4 border-navy">
+        <div className="max-w-6xl mx-auto px-5 md:px-10 py-16 md:py-24 grid grid-cols-1 md:grid-cols-[1fr,1.2fr] gap-10 md:gap-16 items-center">
+          <div className="w-full max-w-md mx-auto md:mx-0 aspect-[4/5] overflow-hidden rounded-2xl border-4 border-navy">
             <img src={ownerImg} alt={business.ownerName} className="w-full h-full object-cover" loading="lazy" />
           </div>
           <div>
@@ -131,49 +131,14 @@ function Home() {
             <h2 className="font-display text-3xl md:text-5xl uppercase text-navy leading-[0.95] tracking-tight mb-5">
               One kitchen, one weekend at a time.
             </h2>
-            <p className="text-base md:text-lg text-ink-soft leading-relaxed mb-6 max-w-2xl">{business.story}</p>
+            <p className="text-base md:text-lg text-ink-soft leading-relaxed mb-6">{business.story}</p>
             <Link to="/about" className="btn-pill">
               More about Dev <ArrowRight className="size-4" />
             </Link>
           </div>
         </div>
       </section>
-
-      {/* HOW IT WORKS */}
-      <section className="section-navy">
-        <div className="max-w-6xl mx-auto px-5 md:px-10 py-16 md:py-24">
-          <p className="eyebrow text-cobalt mb-3 text-center">How it works</p>
-          <h2 className="font-display text-3xl md:text-5xl uppercase text-center mb-12 leading-none">
-            From kitchen to table
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-            {[
-              { n: "01", t: "Order by Thursday", d: "Pick your meals and check out before 8pm Thursday." },
-              { n: "02", t: "We cook Saturday", d: "Everything's made fresh that morning in small batches." },
-              { n: "03", t: "Pick up & enjoy", d: `Swing by ${business.neighborhood} during your window.` },
-            ].map((s) => (
-              <div key={s.n} className="bg-jet rounded-2xl p-7">
-                <p className="font-display text-cobalt text-5xl md:text-6xl leading-none mb-4">{s.n}</p>
-                <h3 className="font-display text-xl uppercase mb-2">{s.t}</h3>
-                <p className="text-sm text-ink-soft-on-dark leading-relaxed">{s.d}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FINAL CTA */}
-      <section className="section-cobalt">
-        <div className="max-w-4xl mx-auto px-5 md:px-10 py-16 md:py-20 text-center">
-          <h2 className="font-display text-3xl md:text-5xl uppercase leading-none mb-5">
-            This week's batch is open
-          </h2>
-          <p className="text-white/85 mb-7 max-w-xl mx-auto">Place your order before Thursday at 8pm.</p>
-          <Link to="/menu" className="btn-pill bg-white text-navy hover:bg-jet hover:text-white">
-            <ShoppingBag className="size-4" /> See the menu
-          </Link>
-        </div>
-      </section>
     </div>
   );
 }
+
