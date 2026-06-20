@@ -122,10 +122,11 @@ function Home() {
 
       {/* OWNER / STORY */}
       <section className="bg-paper">
-        <div className="max-w-6xl mx-auto px-5 md:px-10 py-16 md:py-24 grid grid-cols-[0.75fr_1fr] gap-6 md:gap-16 items-center">
+        <div className="max-w-6xl mx-auto px-5 md:px-10 py-16 md:py-24 grid grid-cols-[0.6fr_1fr] gap-6 md:gap-16 items-center">
           <div className="w-full aspect-[3/4] overflow-hidden rounded-2xl border-4 border-navy">
             <img src={ownerImg} alt={business.ownerName} className="w-full h-full object-cover" loading="lazy" />
           </div>
+
 
           <div>
             <p className="eyebrow text-cobalt mb-2 md:mb-3 text-xs md:text-sm">About {business.ownerName}</p>
