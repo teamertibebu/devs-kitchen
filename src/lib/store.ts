@@ -235,7 +235,7 @@ const seedBusiness: Business = {
   address: "1244 Harbor View Dr · Apt 4B",
   neighborhood: "San Francisco, CA",
   phone: "(415) 555-0142",
-  instagram: "devskitchen_sf",
+  instagram: "devhusk7",
   email: "hello@Dev'skitchen.example",
   hours: "Pickup Saturdays 11–2pm",
 };
