@@ -1,16 +1,14 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { ShoppingBag, Menu as MenuIcon, X, Clock } from "lucide-react";
+import { ShoppingBag, Menu as MenuIcon, X } from "lucide-react";
 import { Toaster } from "sonner";
-import { useCartCount, useStore } from "@/lib/store";
+import { useCartCount, useCartTotal, useStore, fmtMoney } from "@/lib/store";
 import { useHydrated } from "@/lib/hydrate";
 
 
 function Header() {
   const [open, setOpen] = useState(false);
   const business = useStore((s) => s.business);
-  const cartCount = useCartCount();
-  const hydrated = useHydrated();
   const path = useRouterState({ select: (r) => r.location.pathname });
   const isAdmin = path.startsWith("/admin");
 
@@ -25,36 +23,13 @@ function Header() {
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-3 text-sm leading-tight text-center">
-          <span className="w-9 h-9 rounded-full bg-paper grid place-items-center text-cobalt">
-            <Clock className="size-4" />
-          </span>
-          <div className="text-left">
-            <p className="font-semibold text-navy">Pickup Sat 11AM – 2PM</p>
-            <p className="text-ink-soft text-xs">Orders close Thu 8PM</p>
-          </div>
-        </div>
-
         <nav className="hidden md:flex items-center gap-2">
           <Link to="/" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">Home</Link>
           <Link to="/about" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">About</Link>
           <Link to="/contact" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">Connect</Link>
-          {hydrated && cartCount > 0 && (
-            <Link to="/cart" className="btn-pill ml-2 relative">
-              <ShoppingBag className="size-4" />
-              <span>Order Now</span>
-              <span className="ml-1 bg-cobalt rounded-full text-xs px-2 py-0.5 leading-none">{cartCount}</span>
-            </Link>
-          )}
         </nav>
 
         <div className="flex md:hidden items-center gap-2">
-          {hydrated && cartCount > 0 && (
-            <Link to="/cart" className="relative w-10 h-10 rounded-full bg-paper grid place-items-center text-navy" aria-label="Cart">
-              <ShoppingBag className="size-4" />
-              <span className="absolute -top-1 -right-1 bg-cobalt text-white text-[10px] font-bold rounded-full w-4 h-4 grid place-items-center">{cartCount}</span>
-            </Link>
-          )}
           <button className="w-10 h-10 rounded-full bg-paper grid place-items-center text-navy" onClick={() => setOpen((v) => !v)} aria-label="Menu">
             {open ? <X className="size-5" /> : <MenuIcon className="size-5" />}
           </button>
@@ -77,6 +52,43 @@ function Header() {
         </div>
       )}
     </header>
+  );
+}
+
+function FloatingCartBar() {
+  const cartCount = useCartCount();
+  const cartTotal = useCartTotal();
+  const hydrated = useHydrated();
+  const path = useRouterState({ select: (r) => r.location.pathname });
+
+  if (!hydrated || cartCount === 0) return null;
+  if (path.startsWith("/admin") || path.startsWith("/cart") || path.startsWith("/checkout")) return null;
+
+  return (
+    <div
+      className="fixed left-0 right-0 bottom-0 z-50 px-3 md:px-6 pb-3 md:pb-5 pointer-events-none"
+      style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
+    >
+      <div className="max-w-2xl mx-auto pointer-events-auto animate-[slide-up_0.3s_var(--ease-out-expo)_both]">
+        <Link
+          to="/cart"
+          className="flex items-center justify-between gap-3 bg-navy text-white rounded-full shadow-2xl pl-5 pr-2 py-2 hover:bg-jet transition-colors"
+        >
+          <div className="flex items-center gap-3 min-w-0">
+            <span className="relative">
+              <ShoppingBag className="size-5" />
+              <span className="absolute -top-2 -right-2 bg-cobalt text-white text-[10px] font-bold rounded-full w-4 h-4 grid place-items-center">
+                {cartCount}
+              </span>
+            </span>
+            <span className="font-semibold text-sm">
+              {cartCount} {cartCount === 1 ? "item" : "items"} · {fmtMoney(cartTotal)}
+            </span>
+          </div>
+          <span className="btn-pill-cobalt px-5 py-2 text-sm">Order Now</span>
+        </Link>
+      </div>
+    </div>
   );
 }
 
@@ -113,6 +125,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
       <Header />
       <main className="flex-1">{children}</main>
       {!isAdmin && <Footer />}
+      <FloatingCartBar />
       <Toaster position="top-center" />
     </div>
   );

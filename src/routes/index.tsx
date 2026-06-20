@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { toast } from "sonner";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingBag, Clock } from "lucide-react";
 import { useStore, fmtMoney } from "@/lib/store";
 import { useHydrated } from "@/lib/hydrate";
 import ownerImg from "@/assets/owner.png.asset.json";
@@ -53,6 +53,15 @@ function Home() {
             <h1 className="font-display text-3xl md:text-5xl uppercase tracking-tight leading-none">
               This week's Menu
             </h1>
+            <div className="mt-3 md:mt-4 inline-flex items-center gap-3 text-sm leading-tight">
+              <span className="w-9 h-9 rounded-full bg-white/10 grid place-items-center text-white">
+                <Clock className="size-4" />
+              </span>
+              <div className="text-left">
+                <p className="font-semibold text-white">Pickup Sat 11AM – 2PM</p>
+                <p className="text-ink-soft-on-dark text-xs">Orders close Thu 8PM</p>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
