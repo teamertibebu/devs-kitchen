@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { ShoppingBag, Menu as MenuIcon, X, Mail, Clock } from "lucide-react";
+import { ShoppingBag, Menu as MenuIcon, X, Mail, Clock, Instagram } from "lucide-react";
 import { Toaster } from "sonner";
 import { useCartCount, useStore } from "@/lib/store";
 import { useHydrated } from "@/lib/hydrate";
@@ -20,14 +20,36 @@ function TopContactBar() {
             <p className="text-ink-soft text-xs">Orders close Thu 8PM</p>
           </div>
         </div>
-        <div className="flex items-center gap-3 justify-end">
-          <span className="w-9 h-9 rounded-full bg-paper grid place-items-center text-cobalt">
-            <Mail className="size-4" />
-          </span>
-          <div className="leading-tight">
-            <p className="font-semibold text-navy">{business.email}</p>
-            <p className="text-ink-soft text-xs">Email</p>
-          </div>
+        <div className="flex items-center gap-6 justify-end">
+          <a
+            href={`mailto:${business.email}`}
+            className="flex items-center gap-3 group"
+            aria-label={`Email ${business.email}`}
+          >
+            <span className="w-9 h-9 rounded-full bg-paper grid place-items-center text-cobalt group-hover:bg-cobalt group-hover:text-white transition-colors">
+              <Mail className="size-4" />
+            </span>
+            <div className="leading-tight">
+              <p className="font-semibold text-navy group-hover:text-cobalt transition-colors">{business.email}</p>
+              <p className="text-ink-soft text-xs">Email</p>
+            </div>
+          </a>
+
+          <a
+            href={business.instagram.startsWith("@") ? `https://instagram.com/${business.instagram.slice(1)}` : business.instagram.startsWith("http") ? business.instagram : `https://instagram.com/${business.instagram}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 group"
+            aria-label={`Instagram ${business.instagram}`}
+          >
+            <span className="w-9 h-9 rounded-full bg-paper grid place-items-center text-cobalt group-hover:bg-cobalt group-hover:text-white transition-colors">
+              <Instagram className="size-4" />
+            </span>
+            <div className="leading-tight">
+              <p className="font-semibold text-navy group-hover:text-cobalt transition-colors">{business.instagram}</p>
+              <p className="text-ink-soft text-xs">Instagram</p>
+            </div>
+          </a>
         </div>
       </div>
     </div>
