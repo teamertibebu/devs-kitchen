@@ -107,8 +107,8 @@ function Footer() {
           </div>
           <div className="min-w-0">
             <p className="eyebrow text-cobalt mb-3">Connect</p>
-            <a href={`https://instagram.com/${business.instagram.replace("@", "")}`} className="text-sm inline-flex items-center gap-2 hover:text-cobalt mb-1"><Instagram className="size-4 shrink-0" />{business.instagram}</a>
-            <a href={`mailto:${business.email}`} className="text-sm inline-flex items-center gap-2 hover:text-cobalt mb-1"><Mail className="size-4 shrink-0" />{business.email}</a>
+            <a href={`https://instagram.com/${business.instagram.replace("@", "")}`} className="text-sm flex items-center gap-2 hover:text-cobalt mb-1"><Instagram className="size-4 shrink-0" />{business.instagram}</a>
+            <a href={`mailto:${business.email}`} className="text-sm flex items-center gap-2 hover:text-cobalt"><Mail className="size-4 shrink-0" />{business.email}</a>
           </div>
         </div>
       </div>
