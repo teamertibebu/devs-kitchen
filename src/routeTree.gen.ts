@@ -18,7 +18,6 @@ import { Route as AccountRouteImport } from './routes/account'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as MenuItemIdRouteImport } from './routes/menu.$itemId'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as AdminScheduleRouteImport } from './routes/admin.schedule'
 import { Route as AdminRemindersRouteImport } from './routes/admin.reminders'
@@ -72,11 +71,6 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
-} as any)
-const MenuItemIdRoute = MenuItemIdRouteImport.update({
-  id: '/menu/$itemId',
-  path: '/menu/$itemId',
-  getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
   id: '/success',
@@ -134,7 +128,6 @@ export interface FileRoutesByFullPath {
   '/admin/reminders': typeof AdminRemindersRoute
   '/admin/schedule': typeof AdminScheduleRoute
   '/checkout/success': typeof CheckoutSuccessRoute
-  '/menu/$itemId': typeof MenuItemIdRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/menu/$id': typeof AdminMenuIdRoute
   '/admin/menu/new': typeof AdminMenuNewRoute
@@ -153,7 +146,6 @@ export interface FileRoutesByTo {
   '/admin/reminders': typeof AdminRemindersRoute
   '/admin/schedule': typeof AdminScheduleRoute
   '/checkout/success': typeof CheckoutSuccessRoute
-  '/menu/$itemId': typeof MenuItemIdRoute
   '/admin': typeof AdminIndexRoute
   '/admin/menu/$id': typeof AdminMenuIdRoute
   '/admin/menu/new': typeof AdminMenuNewRoute
@@ -174,7 +166,6 @@ export interface FileRoutesById {
   '/admin/reminders': typeof AdminRemindersRoute
   '/admin/schedule': typeof AdminScheduleRoute
   '/checkout/success': typeof CheckoutSuccessRoute
-  '/menu/$itemId': typeof MenuItemIdRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/menu/$id': typeof AdminMenuIdRoute
   '/admin/menu/new': typeof AdminMenuNewRoute
@@ -196,7 +187,6 @@ export interface FileRouteTypes {
     | '/admin/reminders'
     | '/admin/schedule'
     | '/checkout/success'
-    | '/menu/$itemId'
     | '/admin/'
     | '/admin/menu/$id'
     | '/admin/menu/new'
@@ -215,7 +205,6 @@ export interface FileRouteTypes {
     | '/admin/reminders'
     | '/admin/schedule'
     | '/checkout/success'
-    | '/menu/$itemId'
     | '/admin'
     | '/admin/menu/$id'
     | '/admin/menu/new'
@@ -235,7 +224,6 @@ export interface FileRouteTypes {
     | '/admin/reminders'
     | '/admin/schedule'
     | '/checkout/success'
-    | '/menu/$itemId'
     | '/admin/'
     | '/admin/menu/$id'
     | '/admin/menu/new'
@@ -250,7 +238,6 @@ export interface RootRouteChildren {
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRouteWithChildren
   ContactRoute: typeof ContactRoute
-  MenuItemIdRoute: typeof MenuItemIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -317,13 +304,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
-    }
-    '/menu/$itemId': {
-      id: '/menu/$itemId'
-      path: '/menu/$itemId'
-      fullPath: '/menu/$itemId'
-      preLoaderRoute: typeof MenuItemIdRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/checkout/success': {
       id: '/checkout/success'
@@ -439,8 +419,17 @@ const rootRouteChildren: RootRouteChildren = {
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRouteWithChildren,
   ContactRoute: ContactRoute,
-  MenuItemIdRoute: MenuItemIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
