@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { ShoppingBag, Menu as MenuIcon, X, Mail, Clock } from "lucide-react";
+import { ShoppingBag, Menu as MenuIcon, X, Mail, Clock, Instagram } from "lucide-react";
 import { Toaster } from "sonner";
 import { useCartCount, useStore } from "@/lib/store";
 import { useHydrated } from "@/lib/hydrate";
