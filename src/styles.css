@@ -32,6 +32,7 @@
 
   --color-bg: var(--bg);
   --color-bg-dark: var(--bg-dark);
+  --color-paper: var(--paper);
   --color-paper-dark: var(--paper-dark);
   --color-ink: var(--ink);
   --color-ink-on-dark: var(--ink-on-dark);
@@ -39,37 +40,39 @@
   --color-ink-soft-on-dark: var(--ink-soft-on-dark);
   --color-rule: var(--rule);
   --color-rule-on-dark: var(--rule-on-dark);
-  --color-paper: var(--paper);
   --color-brand: var(--brand);
   --color-brand-ink: var(--brand-ink);
-  --color-olive: var(--olive);
+  --color-mustard: var(--mustard);
+  --color-navy: var(--navy);
+  --color-olive: var(--mustard);
 
-
-  --font-display: "Archivo Black", system-ui, sans-serif;
-  --font-body: "Hind", system-ui, sans-serif;
-  --font-sans: "Hind", system-ui, sans-serif;
+  --font-display: "Alfa Slab One", Georgia, serif;
+  --font-script: "Caveat", "Comic Sans MS", cursive;
+  --font-body: "Bitter", Georgia, serif;
+  --font-sans: "Bitter", Georgia, serif;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0.25rem;
 
-  /* Brand tokens — Olive & Paprika: warm cream + olive + paprika red */
-  --bg: oklch(0.948 0.018 85);             /* warm cream ~#f6f1e6 */
-  --paper: oklch(0.97 0.015 85);           /* lighter cream card ~#fbf7ed */
-  --bg-dark: oklch(0.20 0.012 60);         /* deep coffee-black */
-  --paper-dark: oklch(0.26 0.014 60);      /* slightly lighter dark card */
-  --ink: oklch(0.22 0.012 60);             /* deep coffee ~#2a2620 */
-  --ink-on-dark: oklch(0.95 0.018 85);     /* cream on dark */
-  --ink-soft: oklch(0.50 0.015 65);        /* warm grey ~#6e6358 */
-  --ink-soft-on-dark: oklch(0.72 0.018 80);
-  --rule: oklch(0.22 0.012 60 / 0.14);
-  --rule-on-dark: oklch(0.97 0.015 85 / 0.14);
+  /* Retro Diner palette */
+  --bg: #fff8e7;           /* cream */
+  --paper: #fffdf5;        /* lighter cream card */
+  --bg-dark: #1a3c5a;      /* navy */
+  --paper-dark: #234a6b;
+  --ink: #1a3c5a;          /* navy ink */
+  --ink-on-dark: #fff8e7;
+  --ink-soft: #5a6b7a;
+  --ink-soft-on-dark: #cfd9e3;
+  --rule: rgba(26, 60, 90, 0.18);
+  --rule-on-dark: rgba(255, 248, 231, 0.2);
 
-  --brand: oklch(0.52 0.16 35);            /* deep paprika ~#a8351a */
-  --brand-ink: oklch(0.97 0.015 85);       /* cream */
-  --olive: oklch(0.58 0.11 115);           /* olive green ~#7a8a3a */
+  --brand: #d4232a;        /* tomato red */
+  --brand-ink: #fff8e7;
+  --mustard: #f4c430;
+  --navy: #1a3c5a;
 
   /* Shadcn mappings */
   --background: var(--bg);
@@ -80,16 +83,16 @@
   --popover-foreground: var(--ink);
   --primary: var(--brand);
   --primary-foreground: var(--brand-ink);
-  --secondary: oklch(0.92 0.018 85);
+  --secondary: var(--mustard);
   --secondary-foreground: var(--ink);
-  --muted: oklch(0.92 0.018 85);
+  --muted: #f4ecd6;
   --muted-foreground: var(--ink-soft);
-  --accent: var(--olive);
-  --accent-foreground: oklch(0.97 0.015 85);
-  --destructive: oklch(0.55 0.18 30);
-  --destructive-foreground: oklch(1 0 0);
+  --accent: var(--mustard);
+  --accent-foreground: var(--ink);
+  --destructive: #c4322a;
+  --destructive-foreground: #fff8e7;
   --border: var(--rule);
-  --input: oklch(0.22 0.012 60 / 0.18);
+  --input: rgba(26, 60, 90, 0.2);
   --ring: var(--brand);
 }
 
@@ -106,14 +109,17 @@
   }
   .font-display {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: 0.005em;
+  }
+  .font-script {
+    font-family: var(--font-script);
   }
 }
 
 @utility eyebrow {
   font-family: var(--font-body);
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.2em;
   color: var(--color-ink-soft);
@@ -124,6 +130,61 @@
   color: var(--color-ink-on-dark);
 }
 
+/* Paper grain — subtle dotted noise overlay */
+@utility paper-grain {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(26, 60, 90, 0.06) 1px, transparent 1px);
+    background-size: 4px 4px;
+    mix-blend-mode: multiply;
+    opacity: 0.5;
+  }
+}
+
+/* Dashed ticket border */
+@utility ticket {
+  background: var(--color-paper);
+  border: 2px dashed var(--color-navy);
+  box-shadow: 4px 4px 0 0 var(--color-navy);
+}
+
+/* Sticker price — rotated mustard pill */
+@utility sticker-price {
+  display: inline-block;
+  background: var(--color-mustard);
+  color: var(--color-navy);
+  font-family: var(--font-display);
+  padding: 0.25rem 0.75rem;
+  border: 2px solid var(--color-navy);
+  transform: rotate(-6deg);
+  box-shadow: 2px 2px 0 0 var(--color-navy);
+}
+
+@utility btn-diner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-brand);
+  color: var(--color-brand-ink);
+  font-family: var(--font-display);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: 2px solid var(--color-navy);
+  box-shadow: 3px 3px 0 0 var(--color-navy);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  &:hover {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 0 var(--color-navy);
+  }
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 0 var(--color-navy);
+  }
+}
 
 @keyframes slide-up {
   from { opacity: 0; transform: translateY(20px); }
@@ -132,4 +193,8 @@
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-6deg); }
+  50% { transform: rotate(-3deg); }
 }
