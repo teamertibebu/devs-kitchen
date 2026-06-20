@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { toast } from "sonner";
-import { ShoppingBag, ArrowRight } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import { useStore, fmtMoney } from "@/lib/store";
 import { useHydrated } from "@/lib/hydrate";
 import ownerImg from "@/assets/owner.png.asset.json";
@@ -83,14 +83,6 @@ function Home() {
                     >
                       <ShoppingBag className="size-4" /> Add to bag
                     </button>
-                    <Link
-                      to="/menu/$itemId"
-                      params={{ itemId: item.id }}
-                      className="hidden md:inline-flex w-10 h-10 rounded-full border border-white/20 items-center justify-center hover:bg-white/10 shrink-0"
-                      aria-label="See details"
-                    >
-                      <ArrowRight className="size-4" />
-                    </Link>
                   </div>
                 </div>
               </article>

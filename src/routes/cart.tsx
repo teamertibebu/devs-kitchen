@@ -32,7 +32,7 @@ function CartPage() {
         <h1 className="font-display text-4xl md:text-6xl uppercase mb-6">Nothing here yet</h1>
         <p className="text-ink-soft mb-8">Browse this week's menu to start your pre-order.</p>
         <Link
-          to="/menu"
+          to="/"
           className="bg-brand text-brand-ink px-7 py-4 font-bold uppercase text-xs tracking-[0.2em] inline-block"
         >
           See the menu →
