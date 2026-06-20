@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { ShoppingBag, ArrowRight } from "lucide-react";
 import { useStore, fmtMoney } from "@/lib/store";
 import { useHydrated } from "@/lib/hydrate";
-import ownerImg from "@/assets/owner.jpg";
+import ownerImg from "@/assets/owner.png.asset.json";
 
 if (import.meta.hot) {
   import.meta.hot.accept(() => {
