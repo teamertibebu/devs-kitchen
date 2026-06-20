@@ -45,16 +45,16 @@ function Home() {
   return (
     <div>
       {/* HERO — split cobalt/navy backdrop with two black meal cards */}
-      <section className="relative">
-        <div className="grid grid-cols-2 absolute inset-0 -z-10">
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 grid grid-cols-2">
           <div className="bg-cobalt" />
           <div className="bg-navy" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-5 md:py-10">
+        <div className="relative max-w-6xl mx-auto px-4 md:px-8 py-5 md:py-12">
           <div className="text-center mb-4 md:mb-8 text-white">
-            <p className="eyebrow text-white/70 mb-1">This week's menu</p>
-            <h1 className="font-display text-3xl md:text-6xl uppercase tracking-tight leading-none">
+            <p className="eyebrow text-white/70 mb-2">This week's menu</p>
+            <h1 className="font-display text-3xl md:text-5xl uppercase tracking-tight leading-none">
               Made by hand, every weekend
             </h1>
           </div>
@@ -63,17 +63,17 @@ function Home() {
             {weekMeals.map((item, i) => (
               <article
                 key={item.id}
-                className="bg-jet text-white rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl flex flex-row md:flex-col animate-[slide-up_0.6s_var(--ease-out-expo)_both]"
+                className="bg-jet text-white rounded-2xl overflow-hidden shadow-2xl flex flex-row animate-[slide-up_0.6s_var(--ease-out-expo)_both]"
                 style={{ animationDelay: `${i * 0.1}s` }}
               >
-                <div className="relative w-[40%] md:w-full md:aspect-[4/3] flex-shrink-0">
+                <div className="relative w-[42%] flex-shrink-0">
                   <img src={item.image} alt={item.name} className="absolute inset-0 w-full h-full object-cover" />
-                  <span className="absolute top-2 right-2 md:top-3 md:right-3 bg-cobalt text-white font-display text-sm md:text-lg px-3 py-1 rounded-full">
+                  <span className="absolute top-2 right-2 md:top-3 md:right-3 bg-cobalt text-white font-display text-sm md:text-base px-3 py-1 rounded-full">
                     {fmtMoney(item.price).replace(".00", "")}
                   </span>
                 </div>
 
-                <div className="flex-1 min-w-0 flex flex-col p-3 md:p-6">
+                <div className="flex-1 min-w-0 flex flex-col p-3 md:p-5">
                   <h2 className="font-display text-base md:text-2xl uppercase leading-tight mb-1 md:mb-2 line-clamp-2">
                     {item.name}
                   </h2>
@@ -83,14 +83,14 @@ function Home() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleAdd(item.id, item.name)}
-                      className="btn-pill-cobalt flex-1 py-2 md:py-3 text-xs md:text-sm"
+                      className="btn-pill-cobalt flex-1 py-2 md:py-2.5 text-xs md:text-sm"
                     >
                       <ShoppingBag className="size-4" /> Add to bag
                     </button>
                     <Link
                       to="/menu/$itemId"
                       params={{ itemId: item.id }}
-                      className="hidden md:inline-flex w-10 h-10 rounded-full border border-white/20 items-center justify-center hover:bg-white/10"
+                      className="hidden md:inline-flex w-10 h-10 rounded-full border border-white/20 items-center justify-center hover:bg-white/10 shrink-0"
                       aria-label="See details"
                     >
                       <ArrowRight className="size-4" />
