@@ -68,7 +68,6 @@ function Header() {
 
           <nav className="hidden md:flex items-center gap-2">
             <Link to="/" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">Home</Link>
-            <Link to="/menu" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">Menu</Link>
             <Link to="/about" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">About</Link>
             <Link to="/contact" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">Connect</Link>
             <Link to="/cart" className="btn-pill ml-2 relative">
