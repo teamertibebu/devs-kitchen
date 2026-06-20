@@ -132,10 +132,7 @@ function Home() {
             <h2 className="font-display text-2xl md:text-5xl uppercase text-navy leading-[0.95] tracking-tight mb-3 md:mb-5">
               One kitchen, one weekend at a time.
             </h2>
-            <p className="text-sm md:text-lg text-ink-soft leading-relaxed mb-4 md:mb-6">{business.story}</p>
-            <Link to="/about" className="btn-pill text-xs md:text-sm">
-              More about Dev <ArrowRight className="size-4" />
-            </Link>
+            <p className="text-sm md:text-lg text-ink-soft leading-relaxed">{business.story}</p>
           </div>
         </div>
       </section>
