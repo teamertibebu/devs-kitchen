@@ -122,22 +122,23 @@ function Home() {
 
       {/* OWNER / STORY */}
       <section className="bg-paper">
-        <div className="max-w-6xl mx-auto px-5 md:px-10 py-16 md:py-24 grid grid-cols-1 md:grid-cols-[1fr,1.2fr] gap-10 md:gap-16 items-center">
-          <div className="w-full max-w-md mx-auto md:mx-0 aspect-[4/5] overflow-hidden rounded-2xl border-4 border-navy">
+        <div className="max-w-6xl mx-auto px-5 md:px-10 py-16 md:py-24 grid grid-cols-2 gap-6 md:gap-16 items-center">
+          <div className="w-full aspect-[4/5] overflow-hidden rounded-2xl border-4 border-navy">
             <img src={ownerImg} alt={business.ownerName} className="w-full h-full object-cover" loading="lazy" />
           </div>
           <div>
-            <p className="eyebrow text-cobalt mb-3">About {business.ownerName}</p>
-            <h2 className="font-display text-3xl md:text-5xl uppercase text-navy leading-[0.95] tracking-tight mb-5">
+            <p className="eyebrow text-cobalt mb-2 md:mb-3 text-xs md:text-sm">About {business.ownerName}</p>
+            <h2 className="font-display text-2xl md:text-5xl uppercase text-navy leading-[0.95] tracking-tight mb-3 md:mb-5">
               One kitchen, one weekend at a time.
             </h2>
-            <p className="text-base md:text-lg text-ink-soft leading-relaxed mb-6">{business.story}</p>
-            <Link to="/about" className="btn-pill">
+            <p className="text-sm md:text-lg text-ink-soft leading-relaxed mb-4 md:mb-6">{business.story}</p>
+            <Link to="/about" className="btn-pill text-xs md:text-sm">
               More about Dev <ArrowRight className="size-4" />
             </Link>
           </div>
         </div>
       </section>
+
     </div>
   );
 }
