@@ -69,7 +69,6 @@ function Header() {
 
   return (
     <>
-      <TopContactBar />
       <header className="sticky top-0 z-50 bg-white border-b border-rule">
         <div className="max-w-7xl mx-auto px-5 md:px-8 py-3 flex items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-3 min-w-0">
@@ -82,22 +81,22 @@ function Header() {
             <Link to="/" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">Home</Link>
             <Link to="/about" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">About</Link>
             <Link to="/contact" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">Connect</Link>
-            <Link to="/cart" className="btn-pill ml-2 relative">
-              <ShoppingBag className="size-4" />
-              <span>Order Now</span>
-              {hydrated && cartCount > 0 && (
+            {hydrated && cartCount > 0 && (
+              <Link to="/cart" className="btn-pill ml-2 relative">
+                <ShoppingBag className="size-4" />
+                <span>Order Now</span>
                 <span className="ml-1 bg-cobalt rounded-full text-xs px-2 py-0.5 leading-none">{cartCount}</span>
-              )}
-            </Link>
+              </Link>
+            )}
           </nav>
 
           <div className="flex md:hidden items-center gap-2">
-            <Link to="/cart" className="relative w-10 h-10 rounded-full bg-paper grid place-items-center text-navy" aria-label="Cart">
-              <ShoppingBag className="size-4" />
-              {hydrated && cartCount > 0 && (
+            {hydrated && cartCount > 0 && (
+              <Link to="/cart" className="relative w-10 h-10 rounded-full bg-paper grid place-items-center text-navy" aria-label="Cart">
+                <ShoppingBag className="size-4" />
                 <span className="absolute -top-1 -right-1 bg-cobalt text-white text-[10px] font-bold rounded-full w-4 h-4 grid place-items-center">{cartCount}</span>
-              )}
-            </Link>
+              </Link>
+            )}
             <button className="w-10 h-10 rounded-full bg-paper grid place-items-center text-navy" onClick={() => setOpen((v) => !v)} aria-label="Menu">
               {open ? <X className="size-5" /> : <MenuIcon className="size-5" />}
             </button>
@@ -120,6 +119,7 @@ function Header() {
           </div>
         )}
       </header>
+      <TopContactBar />
     </>
   );
 }
