@@ -51,9 +51,6 @@ function Header() {
       <header className="sticky top-0 z-50 bg-white border-b border-rule">
         <div className="max-w-7xl mx-auto px-5 md:px-8 py-3 flex items-center justify-between gap-4">
           <Link to="/" className="flex items-center gap-3 min-w-0">
-            <span className="w-10 h-10 md:w-11 md:h-11 rounded-full bg-jet text-cobalt grid place-items-center font-display text-base leading-none shrink-0">
-              DK
-            </span>
             <span className="font-display text-lg md:text-xl text-navy truncate uppercase tracking-tight">
               {business.name}
             </span>
