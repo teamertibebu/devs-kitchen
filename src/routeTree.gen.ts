@@ -74,9 +74,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   getParentRoute: () => AdminRoute,
 } as any)
 const MenuItemIdRoute = MenuItemIdRouteImport.update({
-  id: '/$itemId',
-  path: '/$itemId',
-  getParentRoute: () => MenuRoute,
+  id: '/menu/$itemId',
+  path: '/menu/$itemId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
   id: '/success',
@@ -250,6 +250,7 @@ export interface RootRouteChildren {
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRouteWithChildren
   ContactRoute: typeof ContactRoute
+  MenuItemIdRoute: typeof MenuItemIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -319,10 +320,10 @@ declare module '@tanstack/react-router' {
     }
     '/menu/$itemId': {
       id: '/menu/$itemId'
-      path: '/$itemId'
+      path: '/menu/$itemId'
       fullPath: '/menu/$itemId'
       preLoaderRoute: typeof MenuItemIdRouteImport
-      parentRoute: typeof MenuRoute
+      parentRoute: typeof rootRouteImport
     }
     '/checkout/success': {
       id: '/checkout/success'
@@ -438,17 +439,8 @@ const rootRouteChildren: RootRouteChildren = {
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRouteWithChildren,
   ContactRoute: ContactRoute,
+  MenuItemIdRoute: MenuItemIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
