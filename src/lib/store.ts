@@ -383,7 +383,7 @@ export const useStore = create<State>()(
         typeof window !== "undefined" ? localStorage : (undefined as unknown as Storage),
       ),
       // Reseed images if the persisted version stored stale src paths from a previous build.
-      version: 1,
+      version: 2,
     },
   ),
 );

@@ -53,9 +53,8 @@ function Home() {
 
         <div className="relative max-w-6xl mx-auto px-4 md:px-8 py-5 md:py-12">
           <div className="text-center mb-4 md:mb-8 text-white">
-            <p className="eyebrow text-white/70 mb-2">This week's menu</p>
             <h1 className="font-display text-3xl md:text-5xl uppercase tracking-tight leading-none">
-              Made by hand, every weekend
+              This week's Menu
             </h1>
           </div>
 
