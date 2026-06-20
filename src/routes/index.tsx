@@ -34,7 +34,7 @@ function Home() {
   const addToCart = useStore((s) => s.addToCart);
   const hydrated = useHydrated();
 
-  const weekMeals = items.filter((i) => i.featured && !i.soldOut).slice(0, 2);
+  const weekMeals = items.filter((i) => i.featured && !i.soldOut).slice(0, 4);
   const sat = schedule.pickupDays[0];
 
   const handleAdd = (id: string, name: string) => {
