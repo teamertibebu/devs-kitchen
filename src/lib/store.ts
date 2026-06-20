@@ -166,7 +166,7 @@ const seedItems: Item[] = [
     image: dishCake,
     available: true,
     soldOut: false,
-    featured: false,
+    featured: true,
     popular: true,
   },
 ];
