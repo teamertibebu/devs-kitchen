@@ -7,13 +7,21 @@ import { useHydrated } from "@/lib/hydrate";
 
 function StatusStrip() {
   const schedule = useStore((s) => s.schedule);
+  const hydrated = useHydrated();
   const next = schedule.pickupDays[0];
   return (
     <div className="sticky top-0 z-50 bg-brand text-brand-ink py-2.5 px-4 text-center text-[11px] font-semibold uppercase tracking-[0.2em] animate-[fade-in_0.6s_var(--ease-out-expo)]">
-      Orders close Thu 8pm · Pickup {next?.label.split(",")[0]}
+      {hydrated ? (
+        <>
+          {schedule.weekLabel} · Orders close Thu 8pm · Pickup {next?.label.split(",")[0]}
+        </>
+      ) : (
+        <>Orders close Thu 8pm · Pickup Saturday</>
+      )}
     </div>
   );
 }
+
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -75,34 +83,35 @@ function Footer() {
   if (path.startsWith("/admin")) return null;
 
   return (
-    <footer className="bg-bg border-t border-rule mt-20">
+    <footer className="section-dark border-t border-rule-on-dark">
       <div className="max-w-7xl mx-auto px-5 md:px-10 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
         <div className="md:col-span-2">
           <p className="font-display text-2xl uppercase mb-3">{business.name}</p>
-          <p className="text-sm text-ink-soft max-w-sm">{business.tagline}</p>
+          <p className="text-sm text-ink-soft-on-dark max-w-sm">{business.tagline}</p>
         </div>
         <div>
-          <p className="eyebrow mb-3">Pickup</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">Pickup</p>
           <p className="text-sm leading-relaxed">
             {business.address}
             <br />
             {business.neighborhood}
             <br />
-            <span className="text-ink-soft">{business.hours}</span>
+            <span className="text-ink-soft-on-dark">{business.hours}</span>
           </p>
         </div>
         <div>
-          <p className="eyebrow mb-3">Find us</p>
-          <a href={`https://instagram.com/${business.instagram.replace("@", "")}`} className="text-sm block underline underline-offset-4 decoration-brand/40 hover:text-brand mb-1">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand mb-3">Find us</p>
+          <a href={`https://instagram.com/${business.instagram.replace("@", "")}`} className="text-sm block underline underline-offset-4 decoration-brand/60 hover:text-brand mb-1">
             {business.instagram}
           </a>
           <a href={`mailto:${business.email}`} className="text-sm block hover:text-brand">{business.email}</a>
-          <p className="text-[10px] uppercase tracking-widest text-ink-soft mt-6">© {new Date().getFullYear()} {business.name} · <Link to="/admin" className="hover:text-brand">Owner</Link></p>
+          <p className="text-[10px] uppercase tracking-widest text-ink-soft-on-dark mt-6">© {new Date().getFullYear()} {business.name} · <Link to="/admin" className="hover:text-brand">Owner</Link></p>
         </div>
       </div>
     </footer>
   );
 }
+
 
 function MobileStickyCTA() {
   const path = useRouterState({ select: (r) => r.location.pathname });

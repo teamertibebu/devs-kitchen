@@ -31,13 +31,19 @@
   --color-ring: var(--ring);
 
   --color-bg: var(--bg);
+  --color-bg-dark: var(--bg-dark);
+  --color-paper-dark: var(--paper-dark);
   --color-ink: var(--ink);
+  --color-ink-on-dark: var(--ink-on-dark);
   --color-ink-soft: var(--ink-soft);
+  --color-ink-soft-on-dark: var(--ink-soft-on-dark);
   --color-rule: var(--rule);
+  --color-rule-on-dark: var(--rule-on-dark);
   --color-paper: var(--paper);
   --color-brand: var(--brand);
   --color-brand-ink: var(--brand-ink);
   --color-olive: var(--olive);
+
 
   --font-display: "Archivo Black", system-ui, sans-serif;
   --font-body: "Hind", system-ui, sans-serif;
@@ -52,9 +58,15 @@
   /* Brand tokens — Olive & Paprika: warm cream + olive + paprika red */
   --bg: oklch(0.948 0.018 85);             /* warm cream ~#f6f1e6 */
   --paper: oklch(0.97 0.015 85);           /* lighter cream card ~#fbf7ed */
+  --bg-dark: oklch(0.20 0.012 60);         /* deep coffee-black */
+  --paper-dark: oklch(0.26 0.014 60);      /* slightly lighter dark card */
   --ink: oklch(0.22 0.012 60);             /* deep coffee ~#2a2620 */
+  --ink-on-dark: oklch(0.95 0.018 85);     /* cream on dark */
   --ink-soft: oklch(0.50 0.015 65);        /* warm grey ~#6e6358 */
+  --ink-soft-on-dark: oklch(0.72 0.018 80);
   --rule: oklch(0.22 0.012 60 / 0.14);
+  --rule-on-dark: oklch(0.97 0.015 85 / 0.14);
+
   --brand: oklch(0.52 0.16 35);            /* deep paprika ~#a8351a */
   --brand-ink: oklch(0.97 0.015 85);       /* cream */
   --olive: oklch(0.58 0.11 115);           /* olive green ~#7a8a3a */
@@ -106,6 +118,12 @@
   letter-spacing: 0.2em;
   color: var(--color-ink-soft);
 }
+
+@utility section-dark {
+  background-color: var(--color-bg-dark);
+  color: var(--color-ink-on-dark);
+}
+
 
 @keyframes slide-up {
   from { opacity: 0; transform: translateY(20px); }
