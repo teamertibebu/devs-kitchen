@@ -98,7 +98,7 @@ function Footer() {
   if (path.startsWith("/admin")) return null;
 
   return (
-    <footer className="section-navy mt-16">
+    <footer className="section-navy">
       <div className="max-w-7xl mx-auto px-5 md:px-10 py-8 md:py-10">
         <div className="grid grid-cols-2 gap-4 md:gap-8">
           <div className="min-w-0">
