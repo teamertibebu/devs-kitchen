@@ -11,6 +11,7 @@ function Header() {
   const business = useStore((s) => s.business);
   const path = useRouterState({ select: (r) => r.location.pathname });
   const isAdmin = path.startsWith("/admin");
+  const isCart = path.startsWith("/cart");
 
   if (isAdmin) return null;
 
@@ -23,11 +24,11 @@ function Header() {
           </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-2">
-          <Link to="/" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">Home</Link>
-          <Link to="/about" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">About</Link>
-          <Link to="/contact" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">Connect</Link>
-        </nav>
+        {isCart && (
+          <nav className="hidden md:flex items-center gap-2">
+            <Link to="/" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">Home</Link>
+          </nav>
+        )}
 
         <div className="flex md:hidden items-center gap-2">
           <button className="w-10 h-10 rounded-full bg-paper grid place-items-center text-navy" onClick={() => setOpen((v) => !v)} aria-label="Menu">
@@ -39,9 +40,7 @@ function Header() {
         <div className="md:hidden border-t border-rule bg-white">
           <nav className="px-5 py-3 flex flex-col">
             {[
-              ["/", "Home"],
-              ["/about", "About"],
-              ["/contact", "Connect"],
+              ...(isCart ? [["/", "Home"]] : []),
               ["/account", "Account"],
             ].map(([to, label]) => (
               <Link key={to} to={to} onClick={() => setOpen(false)} className="py-3 border-b border-rule font-semibold text-navy">
@@ -54,6 +53,7 @@ function Header() {
     </header>
   );
 }
+
 
 function FloatingCartBar() {
   const cartCount = useCartCount();
