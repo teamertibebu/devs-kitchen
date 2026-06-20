@@ -21,8 +21,9 @@ function About() {
       <span className="eyebrow block mb-3">About</span>
       <h1 className="font-display text-5xl md:text-7xl uppercase leading-[0.9] mb-10">{business.ownerName}</h1>
 
-      <div className="grid grid-cols-[0.75fr_1fr] gap-6 md:gap-10">
+      <div className="grid grid-cols-[0.6fr_1fr] gap-6 md:gap-10">
         <img src={ownerImg} alt={business.ownerName} className="w-full aspect-[3/4] object-cover" />
+
 
         <div className="space-y-4 md:space-y-6 text-sm md:text-lg leading-relaxed">
           <p>{business.story}</p>
