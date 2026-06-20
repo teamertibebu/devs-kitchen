@@ -68,7 +68,6 @@ function Header() {
 
           <nav className="hidden md:flex items-center gap-2">
             <Link to="/" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">Home</Link>
-            <Link to="/menu" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">Menu</Link>
             <Link to="/about" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">About</Link>
             <Link to="/contact" className="px-4 py-2 text-sm font-semibold text-navy hover:text-cobalt">Connect</Link>
             <Link to="/cart" className="btn-pill ml-2 relative">
@@ -97,7 +96,6 @@ function Header() {
             <nav className="px-5 py-3 flex flex-col">
               {[
                 ["/", "Home"],
-                ["/menu", "Menu"],
                 ["/about", "About"],
                 ["/contact", "Connect"],
                 ["/account", "Account"],
@@ -121,21 +119,13 @@ function Footer() {
 
   return (
     <footer className="section-navy mt-16">
-      <div className="max-w-7xl mx-auto px-5 md:px-10 py-14 grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto px-5 md:px-10 py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
         <div className="md:col-span-2 flex items-start gap-4">
           <span className="w-14 h-14 rounded-full bg-jet text-cobalt grid place-items-center font-display text-lg shrink-0">DK</span>
           <div>
             <p className="font-display text-2xl uppercase mb-2">{business.name}</p>
             <p className="text-sm text-ink-soft-on-dark max-w-sm">{business.tagline}</p>
           </div>
-        </div>
-        <div>
-          <p className="eyebrow text-cobalt mb-3">Pickup</p>
-          <p className="text-sm leading-relaxed">
-            {business.address}<br />
-            {business.neighborhood}<br />
-            <span className="text-ink-soft-on-dark">{business.hours}</span>
-          </p>
         </div>
         <div>
           <p className="eyebrow text-cobalt mb-3">Connect</p>
