@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { ShoppingBag } from "lucide-react";
 import { useStore, fmtMoney } from "@/lib/store";
-import { useHydrated } from "@/lib/hydrate";
 import ownerImg from "@/assets/owner.png.asset.json";
 
 if (import.meta.hot) {
@@ -30,12 +29,9 @@ export const Route = createFileRoute("/")({
 function Home() {
   const items = useStore((s) => s.items);
   const business = useStore((s) => s.business);
-  const schedule = useStore((s) => s.schedule);
   const addToCart = useStore((s) => s.addToCart);
-  const hydrated = useHydrated();
 
   const weekMeals = items.filter((i) => i.featured && !i.soldOut).slice(0, 4);
-  const sat = schedule.pickupDays[0];
 
   const handleAdd = (id: string, name: string) => {
     addToCart(id, 1);
@@ -93,22 +89,6 @@ function Home() {
             ))}
           </div>
 
-        </div>
-      </section>
-
-      {/* PICKUP INFO STRIP */}
-      <section className="bg-white border-b border-rule">
-        <div className="max-w-7xl mx-auto px-5 md:px-10 py-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
-          {[
-            { eyebrow: "Pickup day", value: hydrated ? sat?.label : "Saturday" },
-            { eyebrow: "Window", value: `${sat?.slots[0].label.split(" — ")[0]} – ${sat?.slots[sat.slots.length - 1].label.split(" — ")[1]}` },
-            { eyebrow: "Where", value: business.neighborhood },
-          ].map((b) => (
-            <div key={b.eyebrow} className="text-center sm:text-left">
-              <p className="eyebrow text-cobalt mb-2">{b.eyebrow}</p>
-              <p className="font-display text-xl md:text-2xl uppercase text-navy">{b.value}</p>
-            </div>
-          ))}
         </div>
       </section>
 
