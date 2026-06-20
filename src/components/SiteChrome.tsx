@@ -119,12 +119,16 @@ function Footer() {
 export function SiteChrome({ children }: { children: ReactNode }) {
   const path = useRouterState({ select: (r) => r.location.pathname });
   const isAdmin = path.startsWith("/admin");
+  const cartCount = useCartCount();
+  const hydrated = useHydrated();
+  const showCartBar = hydrated && cartCount > 0 && !isAdmin && !path.startsWith("/cart") && !path.startsWith("/checkout");
 
   return (
     <div className="min-h-screen flex flex-col font-body bg-bg text-ink selection:bg-cobalt selection:text-white">
       <Header />
       <main className="flex-1">{children}</main>
       {!isAdmin && <Footer />}
+      {showCartBar && <div aria-hidden className="h-24 md:h-20" style={{ paddingBottom: "env(safe-area-inset-bottom)" }} />}
       <FloatingCartBar />
       <Toaster position="top-center" />
     </div>
