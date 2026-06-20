@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { toast } from "sonner";
-import { ShoppingBag, Clock } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import { useStore, fmtMoney } from "@/lib/store";
 import { useHydrated } from "@/lib/hydrate";
 import ownerImg from "@/assets/owner.png.asset.json";
