@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { ShoppingBag, Menu as MenuIcon, X } from "lucide-react";
+import { ShoppingBag, Menu as MenuIcon, X, Instagram } from "lucide-react";
 import { Toaster } from "sonner";
 import { useCartCount, useCartTotal, useStore, fmtMoney } from "@/lib/store";
 import { useHydrated } from "@/lib/hydrate";
@@ -107,7 +107,7 @@ function Footer() {
           </div>
           <div className="min-w-0">
             <p className="eyebrow text-cobalt mb-3">Connect</p>
-            <a href={`https://instagram.com/${business.instagram.replace("@", "")}`} className="text-sm block hover:text-cobalt mb-1">{business.instagram}</a>
+            <a href={`https://instagram.com/${business.instagram.replace("@", "")}`} className="text-sm inline-flex items-center gap-2 hover:text-cobalt mb-1"><Instagram className="size-4" />{business.instagram}</a>
             <a href={`mailto:${business.email}`} className="text-sm block hover:text-cobalt">{business.email}</a>
           </div>
         </div>
@@ -119,12 +119,16 @@ function Footer() {
 export function SiteChrome({ children }: { children: ReactNode }) {
   const path = useRouterState({ select: (r) => r.location.pathname });
   const isAdmin = path.startsWith("/admin");
+  const cartCount = useCartCount();
+  const hydrated = useHydrated();
+  const showCartBar = hydrated && cartCount > 0 && !isAdmin && !path.startsWith("/cart") && !path.startsWith("/checkout");
 
   return (
     <div className="min-h-screen flex flex-col font-body bg-bg text-ink selection:bg-cobalt selection:text-white">
       <Header />
       <main className="flex-1">{children}</main>
       {!isAdmin && <Footer />}
+      {showCartBar && <div aria-hidden className="h-24 md:h-20" style={{ paddingBottom: "env(safe-area-inset-bottom)" }} />}
       <FloatingCartBar />
       <Toaster position="top-center" />
     </div>
