@@ -1,25 +1,17 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { ShoppingBag, Menu as MenuIcon, X, Phone, Mail, Clock } from "lucide-react";
+import { ShoppingBag, Menu as MenuIcon, X, Mail, Clock } from "lucide-react";
 import { Toaster } from "sonner";
 import { useCartCount, useStore } from "@/lib/store";
 import { useHydrated } from "@/lib/hydrate";
+
 
 function TopContactBar() {
   const business = useStore((s) => s.business);
   return (
     <div className="hidden md:block bg-white border-b border-rule">
-      <div className="max-w-7xl mx-auto px-8 py-3 grid grid-cols-3 gap-6 text-sm">
+      <div className="max-w-7xl mx-auto px-8 py-3 grid grid-cols-2 gap-6 text-sm">
         <div className="flex items-center gap-3">
-          <span className="w-9 h-9 rounded-full bg-paper grid place-items-center text-cobalt">
-            <Phone className="size-4" />
-          </span>
-          <div className="leading-tight">
-            <p className="font-semibold text-navy">{business.phone}</p>
-            <p className="text-ink-soft text-xs">Cell</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-3 justify-center border-l border-r border-rule px-6">
           <span className="w-9 h-9 rounded-full bg-paper grid place-items-center text-cobalt">
             <Clock className="size-4" />
           </span>
@@ -41,6 +33,7 @@ function TopContactBar() {
     </div>
   );
 }
+
 
 function Header() {
   const [open, setOpen] = useState(false);
