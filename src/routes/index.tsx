@@ -3,6 +3,15 @@ import { useStore, fmtMoney } from "@/lib/store";
 import { useHydrated } from "@/lib/hydrate";
 import ownerImg from "@/assets/owner.jpg";
 
+// Force a full page reload on HMR updates to this module so layout
+// changes never get masked by a stale Vite error overlay or cached
+// transform during development.
+if (import.meta.hot) {
+  import.meta.hot.accept(() => {
+    import.meta.hot!.invalidate();
+  });
+}
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
