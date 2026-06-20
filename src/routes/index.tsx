@@ -94,18 +94,17 @@ function Home() {
 
       {/* OWNER / STORY */}
       <section className="bg-paper">
-        <div className="max-w-6xl mx-auto px-5 md:px-10 py-16 md:py-24 grid grid-cols-[0.6fr_1fr] gap-6 md:gap-16 items-center">
+        <div className="max-w-6xl mx-auto px-5 md:px-10 py-10 md:py-14 grid grid-cols-[0.6fr_1fr] gap-5 md:gap-10 items-center">
           <div className="w-full aspect-[3/4] overflow-hidden rounded-2xl border-4 border-navy">
             <img src={ownerImg.url} alt={business.ownerName} className="w-full h-full object-cover" loading="lazy" />
           </div>
 
-
           <div>
-            <p className="eyebrow text-cobalt mb-2 md:mb-3 text-xs md:text-sm">About {business.ownerName}</p>
-            <h2 className="font-display text-2xl md:text-5xl uppercase text-navy leading-[0.95] tracking-tight mb-3 md:mb-5">
+            <p className="eyebrow text-cobalt mb-1 md:mb-2 text-xs md:text-sm">About {business.ownerName}</p>
+            <h2 className="font-display text-2xl md:text-4xl uppercase text-navy leading-[0.95] tracking-tight mb-2 md:mb-3">
               One kitchen, one weekend at a time.
             </h2>
-            <p className="text-sm md:text-lg text-ink-soft leading-relaxed">{business.story}</p>
+            <p className="text-sm md:text-base text-ink-soft leading-snug">{business.story}</p>
           </div>
         </div>
       </section>
